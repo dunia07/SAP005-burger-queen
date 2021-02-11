@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const Register = () => {
+const Register = () => {
     <div>
         <header>
             <h1>Fazer Registro</h1>
@@ -11,3 +11,5 @@ export const Register = () => {
         </p>
     </div>
 }; 
+
+export default Register;
