@@ -3,7 +3,7 @@ import LogoLabBurger from '../../image/LogoLabBurger.png'
 import '../../App.css';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const PendingOrders = () => {
   const [users, setUsers] = useState('');
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
@@ -50,4 +50,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default PendingOrders;
