@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{ 
+  font-family: Roboto;
+  background-color: #403D3D;
+}
+
 .App {
   text-align: center;
-  background-color: #282c34;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -10,7 +16,7 @@
 }
 
 .App-logo {
-  height: 20vmin;
+  height: 25vmin;
   pointer-events: none;
 }
 
@@ -33,9 +39,9 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
+/* .App-link {
+  color: #339cd3;
+} */
 
 @keyframes App-logo-spin {
   from {
@@ -63,16 +69,15 @@
 }
 
 .textRegister {
-  color: rgb(238, 238, 84);
+  color: #F4EC54;
   cursor: pointer;
 }
 
 .input {
   width: 300px;
   height: 25px;
-  border-radius: 5px;
-  border-style: solid;
-  border-color: rgb(0, 0, 0);
+  border-radius: 8px;
+  border: 3px solid #339cd3;
   font-size: 12px;
   font-family: Roboto;
   text-transform: uppercase;
@@ -80,7 +85,7 @@
 }
 
 .button {
-  background-color: #2a71f7;
+  background-color: #339cd3;
   color: rgb(12, 12, 12);
   box-shadow: 4px 4px 4px #000000;
   border-radius: 5px;
@@ -93,4 +98,29 @@
   -webkit-text-stroke-color: #000000;
   margin: 20px 0;
   cursor: pointer;
+  
+}
+
+.buttonLogout {
+  color: #339cd3;
+  border: 2px solid #339cd3;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: Roboto;
+  cursor: pointer;
+}
+
+/* .inputRadio {
+  display: flex;
+  justify-content: space-between;
+} */
+
+.pendingOrders {
+  text-align: right;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:left;
+  align-items: flex-start;
 }

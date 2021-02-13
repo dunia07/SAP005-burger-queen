@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LogoLabBurger from '../../image/LogoLabBurger.png'
-import '../../App.css';
+//import '../../App.css';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -19,20 +19,10 @@ const Login = () => {
   }
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={LogoLabBurger} className="App-logo" alt="logo" />
+    <div className='App'>
+      <header className='App-header'>
+        <img src={LogoLabBurger} className='App-logo' alt='logo' />
       </header>
-
-      {/* {
-        users.map((user, index) => (
-          <User
-            key={index}
-            email={user.email}
-            senha={user.password}
-          />
-        ))
-      } */}
 
       <form>
         <input type='text' className='input' id='email' value={email} onChange={(event) => setEmail(event.target.value)}/>
