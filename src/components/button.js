@@ -1,12 +1,12 @@
 import React from 'react';
 
-function Button ({name, id, className, type, onSubmit}) {
+function Button ({name, id, className, type, onClick}) {
     return(
         <button
             id={id}
             className={className}
             type={type}
-            onSubmit={onSubmit}
+            onClick={onClick}
         >{name}</button>
     )
 }
