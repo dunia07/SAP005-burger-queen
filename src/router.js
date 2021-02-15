@@ -1,23 +1,23 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Login from './pages/login/indexLogin';
-import Register from './pages/register/indexRegister';
-import PendingOrders from './pages/kitchen/pendingOrders';
-import HallKitchenFinalized from './pages/common/hallKitchenFinalized'
-import HallMenu from './pages/hall/hallMenu'
-import HallReady from './pages/hall/hallReady'
+import Login from './pages/login/index';
+import Register from './pages/register/index';
+import PendingOrders from './pages/pendingOrders/pendingOrders';
+import FinalizedOrders from './pages/finalizedOrders/finalizedOrders'
+import OrderMenu from './pages/orderMenu/orderMenu'
+import ReadyOrders from './pages/readyOrders/readyOrders'
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path ='/' component={Login} exact />
-        <Route path ='/Register' component={Register} exact />
-        <Route path ='/PendingOrders' component={PendingOrders} exact />
-        <Route path ='/HallKitchenFinalized' component={HallKitchenFinalized} exact />
-        <Route path ='/HallMenu' component={HallMenu} exact />
-        <Route path ='/HallReady' component={HallReady} exact />
+        <Route path ='/register' component={Register} exact />
+        <Route path ='/pending-orders' component={PendingOrders} exact />
+        <Route path ='/finalized-orders' component={FinalizedOrders} exact />
+        <Route path ='/order-menu' component={OrderMenu} exact />
+        <Route path ='/ready-orders' component={ReadyOrders} exact />
       </Switch>
     </BrowserRouter>
   )

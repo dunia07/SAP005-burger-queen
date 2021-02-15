@@ -1,21 +1,22 @@
 import { Link } from 'react-router-dom';
 
-const HallReady = () => {
+const OrderMenu = () => {
   return (
-    <div className='pendingOrders'>
+    <div className='orderMenu'>
       <p>
-        <Link to='/HallMenu'>
-          <span id='button' className='textRegister'>Menu Pedidos</span>
+        <Link to='/ready-orders'>
+          <span id='button' className='textRegister'>Pedidos Prontos</span>
         </Link>  
       </p>
       <p>
-        <Link to='/HallKitchenFinalized'>
+        <Link to='/finalized-orders'>
           <span id='button' className='textRegister'>Pedidos Finalizados</span>
         </Link>  
       </p>
       <Link to='/'><button type='submit' className='buttonLogout' id='btn-logOut'>Sair</button></Link>
     </div>
   )
+    
 }
 
-export default HallReady;
+export default OrderMenu;

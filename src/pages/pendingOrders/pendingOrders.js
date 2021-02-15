@@ -4,7 +4,7 @@ const PendingOrders = () => {
   return (
     <div className='pendingOrders'>
       <p>
-        <Link to='/HallKitchenFinalized'>
+        <Link to='/finalized-orders'>
           <span id='button' className='textRegister'>Pedidos Finalizados</span>
         </Link>  
       </p>

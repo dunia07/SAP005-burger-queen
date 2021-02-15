@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 
-const HallKitchenFinalized = () => {
+const FinalizedOrders = () => {
   return (
-    <div className='pendingOrders'>
+    <div className='finalizedOrders'>
       <p>
-        <Link to='/HallMenu'>
+        <Link to='/order-menu'>
           <span id='button' className='textRegister'>Menu Pedidos</span>
         </Link>  
       </p>
       <p>
-        <Link to='/HallReady'>
+        <Link to='/ready-orders'>
           <span id='button' className='textRegister'>Pedidos Prontos</span>
         </Link>  
       </p>
@@ -18,4 +18,4 @@ const HallKitchenFinalized = () => {
   )
 }
 
-export default HallKitchenFinalized;
+export default FinalizedOrders;
