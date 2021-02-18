@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 //import logo from '../../image/logo.png'
 //import '../../App.css';
+
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/headerLogin';
@@ -8,6 +9,8 @@ import Footer from '../../components/footer';
 
 import Button from '../../components/button';
 import Input from '../../components/input';
+import Header from '../../components/header/outerHeader';
+import Footer from '../../components/footer';
 
 const Login = () => {
   const history = useHistory();
@@ -97,6 +100,7 @@ const Login = () => {
         </form>
         <Footer />
       </div>
+      <Footer />
     </Fragment>
   );
 }

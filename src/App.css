@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-*{ 
+* { 
   font-family: Roboto;
   background-color: #403D3D;
 }
@@ -70,6 +70,7 @@
 
 .yellow-text {
   color: #F4EC54;
+  font-weight: bold;
 }
 
 .input {
@@ -129,4 +130,24 @@
   flex-direction: column;
   justify-content:left;
   align-items: flex-start;
+}
+
+footer, .link-footer {
+  color: white;
+  text-align: center;
+  font-size: 10px;
+  margin: 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+#inner-logo {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: baseline;
+  text-align: right;
+  height: 7vmin;
+  pointer-events: none;
 }

@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import Header from '../../components/header/innerHeader';
+import Footer from '../../components/footer';
 import React, { useState, Fragment, useEffect } from 'react';
 //import logo from '../../image/logo.png'
 //import { Link } from 'react-router-dom';
@@ -6,7 +9,7 @@ import Products from '../../components/products';
 
 import Button from '../../components/button';
 import Input from '../../components/input';
-import Header from '../../components/headerLogin';
+
 
 const OrderMenu = () => {
   const history = useHistory();
