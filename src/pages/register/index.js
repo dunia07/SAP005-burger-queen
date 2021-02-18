@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
+// import logo from '../../image/logo.png'
+// import '../../App.css';
 import { useHistory } from "react-router-dom";
-
 import Button from '../../components/button';
 import Input from '../../components/input';
 import Header from '../../components/header/outerHeader';
@@ -72,9 +73,9 @@ const Register = () => {
   }
 
   return (
-    <Fragment>
+    <div className='App'>
       <Header />
-      <div className='App'>
+      <Fragment>
         <form>
           <Input
             required

@@ -1,6 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
+//import logo from '../../image/logo.png'
+//import '../../App.css';
+
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import Header from '../../components/headerLogin';
+import Footer from '../../components/footer';
 
 import Button from '../../components/button';
 import Input from '../../components/input';
@@ -58,8 +63,8 @@ const Login = () => {
   
   return (
     <Fragment>
-      <Header />
       <div className='App'>
+        <Header />
         <form>
           <Input
             required
@@ -93,6 +98,7 @@ const Login = () => {
             </Link>
           </p>
         </form>
+        <Footer />
       </div>
       <Footer />
     </Fragment>

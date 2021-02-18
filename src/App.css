@@ -80,7 +80,7 @@
   border: 3px solid #339cd3;
   font-size: 12px;
   font-family: Roboto;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin: 20px 0;
 }
 
