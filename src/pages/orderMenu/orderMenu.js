@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+///import { Link } from 'react-router-dom';
 import Header from '../../components/header/innerHeader';
-import Footer from '../../components/footer';
-import React, { useState, Fragment, useEffect } from 'react';
+//import Footer from '../../components/footer';
+import React, { useState, Fragment } from 'react';
 //import logo from '../../image/logo.png'
 //import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -13,13 +13,13 @@ import Input from '../../components/input';
 const OrderMenu = () => {
   const history = useHistory();
 
-  const routerReadyOrders = () => {
-    history.push('/ready-orders')
-  }
+  // const routerReadyOrders = () => {
+  //   history.push('/ready-orders')
+  // }
 
-  const routerFinalizedOrders = () => {
-    history.push('/finalized-orders')
-  }
+  // const routerFinalizedOrders = () => {
+  //   history.push('/finalized-orders')
+  // }
 
   const [userCliente, setUserCliente] = useState(''); 
   const [userMesa, setUserMesa] = useState(''); 
@@ -47,11 +47,11 @@ const OrderMenu = () => {
   //   this.setState({value: e.target.value});
   // }
 
-  const [extras, setExtras] = useState([])
+  // const [extras, setExtras] = useState([])
 
-  const handleExtras = (e) => {
-    setExtras(e.target.value);
-  };
+  // const handleExtras = (e) => {
+  //   setExtras(e.target.value);
+  // };
 
   const buttonLogout = (e) => {
     e.preventDefault();
