@@ -4,9 +4,9 @@ const Products = () => {
  
   const [products, setProducts] = useState([]);
 
-  const handleProducts = (e) => {
-    setProducts(e.target.value);
-  };
+  // const handleProducts = (e) => {
+  //   setProducts(e.target.value);
+  // };
    
   const getProducts = () => {
     // const tokenLocal  = localStorage.getItem('token');
