@@ -6,7 +6,6 @@ import React, { useState, Fragment, useEffect } from 'react';
 //import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import Products from '../../components/products';
-
 import Button from '../../components/button';
 import Input from '../../components/input';
 
@@ -62,7 +61,7 @@ const OrderMenu = () => {
   return (
     <div className='orderMenu'>
       <Header />
-      <Products />
+      
       <Fragment>
         
         <section>
@@ -108,6 +107,7 @@ const OrderMenu = () => {
           onClick={buttonLogout}
         />
       </Fragment>
+      <Products />
       
     </div>
   )

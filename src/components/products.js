@@ -1,7 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
-//import Button from '../../components/button';
 
-const Products = ({id, name}) => {
+const Products = () => {
  
   const [products, setProducts] = useState([]);
 
@@ -27,7 +26,7 @@ const Products = ({id, name}) => {
     .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        setProducts(json.products)
+        setProducts(json)
         
       });
     
@@ -40,39 +39,16 @@ const Products = ({id, name}) => {
   return (
     <div className='products'>
       <Fragment>
-        {/* {
-          products.map((products, index)=> {
+        {
+          products.map((product)=> {
             return (
-              <p key={id} > {name}</p>
+              <div key={`product-${product.id}`} > 
+                <p>{product.name}</p> 
+                <p>{product.price}</p> 
+              </div>
             )
           })
-        } */}
-
-        {/* {
-          menuCafe.map((produto, index) => {
-            return (
-              <p key={index} > {produto.name} {produto.price} </p>
-            )
-          })
-        }             */}
-
-        
-        {/* {
-          menuCafe.push(
-            <div key={products}>
-                <p>{productsName}</p>
-            </div>
-          )
-        } */}
-
-        {/* <Button
-          className='buttonMenu'
-          name='Produtos'
-          type='submit'
-          value={products}
-          onClick={handleProducts}
-        /> */}
-
+        }       
       </Fragment>
       
     </div>
