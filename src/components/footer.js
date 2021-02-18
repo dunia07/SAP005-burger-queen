@@ -1,15 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 
 function Footer () {
   return (
-    <div className='footer'>
-      <Footer>
-        <label className='yellow-text'>Desenvolvido por</label> 
-        <Link to='https://github.com/dunia07'>Dunia Ghazzaoui</Link>
-        <Link to='https://github.com/gabrielasilva1991'>Gabriela Silva</Link>
-      </Footer>
-    </div>
+    <footer className='footer'>
+      <span className='footer-text'> Developed by 
+        <a 
+          className='link-footer' 
+          href='https://github.com/dunia07'
+          target='_blank'
+          rel='noopener noreferrer'
+          > @Dunia Ghazzaoui 
+        </a> &amp; 
+        <a
+          className='link-footer' 
+          href='https://github.com/gabrielasilva1991'
+          target='_blank'
+          rel='noopener noreferrer'
+          > @Gabriela Silva
+        </a>
+      </span>
+    </footer>
   )
 }
 

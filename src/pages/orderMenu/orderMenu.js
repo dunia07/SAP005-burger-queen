@@ -1,9 +1,12 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import logo from '../../image/logo.png'
+//import logo from '../../image/logo.png'
 //import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+import Products from '../../components/products';
+
 import Button from '../../components/button';
 import Input from '../../components/input';
+import Header from '../../components/headerLogin';
 
 const OrderMenu = () => {
   const history = useHistory();
@@ -42,7 +45,7 @@ const OrderMenu = () => {
   //   this.setState({value: e.target.value});
   // }
 
-  const [extras, setExtras] = useState('')
+  const [extras, setExtras] = useState([])
 
   const handleExtras = (e) => {
     setExtras(e.target.value);
@@ -53,38 +56,12 @@ const OrderMenu = () => {
     history.push('/')
   }
   
-  const [produto, setProduto] = useState([]);
-
-  useEffect(() => {
-    // const tokenLocal  = localStorage.getItem('token');
-    // console.log(tokenLocal)
-    // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkE3MEBhNzAuY29tIiwiaWQiOjQ1MSwiaWF0IjoxNjEzNDk1ODk0LCJleHAiOjE2NDUwNTM0OTR9.GM9CSsNFLUeCCETYoWTjYJMwcomXvXVGvC2TcE73peE
-        
-    fetch('https://lab-api-bq.herokuapp.com/products/', {
-      method: 'GET',
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkE3MEBhNzAuY29tIiwiaWQiOjQ1MSwiaWF0IjoxNjEzNDk1ODk0LCJleHAiOjE2NDUwNTM0OTR9.GM9CSsNFLUeCCETYoWTjYJMwcomXvXVGvC2TcE73peE'
-      
-      },
-      
-    })
-    .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        setProduto(json.products)
-        
-      });
-    
-  }, []);
-
   return (
     <div className='orderMenu'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-      </header>
+      <Header />
+      <Products />
       <Fragment>
+        
         <section>
           <Input
             required
@@ -105,27 +82,7 @@ const OrderMenu = () => {
             onChange={handleUserMesa}
           />
         </section>
-        <label className='yellow-text'>Selecione o Menu
-          {/* <select  onChange={handleChange}>
-            <option value={menuCafe}>Café da manhã</option>
-            <option value={menuAlmocoJanta}>Almoço/Jantar</option>
-          </select> */}
-          {/* <input type="submit" value="Enviar" /> */}
-        </label>
-
-        {
-          
-          menuCafe.map((produto, index) => {
-            return (
-              <p key={index} > {produto.name} {produto.price} </p>
-            )
-          })
-        }    
-
-          {/* const filtrarProdutos = (buscarProdutos, array) => {
-            return array.filter(produtos => produtos.type.includes(buscarProdutos));
-          }; */}
-
+        <label className='yellow-text'>Selecione o Menu</label>
         <Button
           className='buttonMenu'
           name='Café da manhã'
