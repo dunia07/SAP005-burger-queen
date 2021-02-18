@@ -145,9 +145,9 @@ const Register = () => {
             onClick={handleButtonRegister}
           />
         </form>
-      </div>
-      <Footer />
     </Fragment>
+    <Footer />
+    </div>
   );
 }
 
