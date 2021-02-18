@@ -4,9 +4,6 @@ import React, { useState, useEffect, Fragment } from 'react';
 
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import Header from '../../components/headerLogin';
-import Footer from '../../components/footer';
-
 import Button from '../../components/button';
 import Input from '../../components/input';
 import Header from '../../components/header/outerHeader';
@@ -98,8 +95,7 @@ const Login = () => {
             </Link>
           </p>
         </form>
-        <Footer />
-      </div>
+        </div>
       <Footer />
     </Fragment>
   );

@@ -44,10 +44,6 @@ const Register = () => {
     setUserJobRole(e.target.value);
   };
 
-  useEffect(() => {
-    console.log('Component App Montado')
-  }, []);
-
   const handleButtonRegister = (e) => {
     e.preventDefault();
     fetch('https://lab-api-bq.herokuapp.com/users/', {
@@ -71,6 +67,10 @@ const Register = () => {
       })
     
   }
+
+  useEffect(() => {
+    console.log('Cadastro efetuado')
+  }, []);
 
   return (
     <div className='App'>
@@ -145,9 +145,9 @@ const Register = () => {
             onClick={handleButtonRegister}
           />
         </form>
-      </div>
-      <Footer />
-    </Fragment>
+        <Footer />
+      </Fragment>
+    </div>
   );
 }
 
