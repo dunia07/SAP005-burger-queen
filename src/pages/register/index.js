@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import logo from '../../image/logo.png'
-// import '../../App.css';
 import { useHistory } from "react-router-dom";
 
 import Button from '../../components/button';
 import Input from '../../components/input';
+import Header from '../../components/header/outerHeader';
+import Footer from '../../components/footer';
 
 const Register = () => {
   const history = useHistory();
@@ -72,11 +72,9 @@ const Register = () => {
   }
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-      </header>
-      <Fragment>
+    <Fragment>
+      <Header />
+      <div className='App'>
         <form>
           <Input
             required
@@ -146,8 +144,9 @@ const Register = () => {
             onClick={handleButtonRegister}
           />
         </form>
-      </Fragment>
-    </div>
+      </div>
+      <Footer />
+    </Fragment>
   );
 }
 

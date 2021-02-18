@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import logo from '../../image/logo.png'
-// import '../../App.css';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 
 import Button from '../../components/button';
 import Input from '../../components/input';
+import Header from '../../components/header/outerHeader';
+import Footer from '../../components/footer';
 
 const Login = () => {
   const history = useHistory();
@@ -58,10 +58,8 @@ const Login = () => {
   
   return (
     <Fragment>
+      <Header />
       <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-        </header>
         <form>
           <Input
             required
@@ -96,6 +94,7 @@ const Login = () => {
           </p>
         </form>
       </div>
+      <Footer />
     </Fragment>
   );
 }
