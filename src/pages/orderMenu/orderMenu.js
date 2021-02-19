@@ -4,14 +4,14 @@ import Header from '../../components/header/innerHeader';
 import React, { useState, Fragment } from 'react';
 //import logo from '../../image/logo.png'
 //import { Link } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import Products from '../../components/products';
 import Button from '../../components/button';
 import Input from '../../components/input';
 
 
 const OrderMenu = () => {
-  const history = useHistory();
+  // const history = useHistory();
 
   // const routerReadyOrders = () => {
   //   history.push('/ready-orders')
@@ -53,17 +53,15 @@ const OrderMenu = () => {
   //   setExtras(e.target.value);
   // };
 
-  const buttonLogout = (e) => {
-    e.preventDefault();
-    history.push('/')
-  }
+  // const buttonLogout = (e) => {
+  //   e.preventDefault();
+  //   history.push('/')
+  // }
   
   return (
     <div className='orderMenu'>
       <Header />
-      
       <Fragment>
-        
         <section>
           <Input
             required
@@ -99,13 +97,12 @@ const OrderMenu = () => {
           value={menuAlmocoJanta}
           onClick={handleMenuAlmocoJanta}
         />
-               
-        <Button
+        {/* <Button
           className='buttonLogout'
           name='Sair'
           type='submit'
           onClick={buttonLogout}
-        />
+        /> */}
       </Fragment>
       <Products />
       
