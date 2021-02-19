@@ -38,15 +38,11 @@ const OrderMenu = () => {
   //   setExtras(e.target.value);
   // };
  
-  return (
-    <div className='orderMenu'>
-      <Header />
-      <Fragment>
 
   const [menuSelect, setMenuSelect] = useState ('Selecione o Menu')
 
   const HandleMenuSelect = (e) => {
-    setMenuSelect(e.target.value);
+  setMenuSelect(e.target.value);
   };
  
   return (
