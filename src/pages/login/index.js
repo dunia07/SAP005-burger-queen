@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/button';
@@ -62,45 +62,43 @@ const Login = () => {
   }
   
   return (
-    <Fragment>
-      <div className='App'>
-        <Header />
-        <form>
-          <Input
-            required
-            className='input'
-            name='userEmail'
-            type='email'
-            // id='email'
-            placeholder='Email'
-            value={userEmail}
-            onChange={handleUserEmail}
-          />
-          <Input
-            required
-            className='input'
-            name='userPassword'
-            type='password'
-            placeholder='Insira sua senha'
-            value={userPassword}
-            onChange={handleUserPassword}
-          />
-          <Button
-            className='button'
-            name='Login'
-            type='submit'
-            onClick={handleButtonLogin}
-          />
-          <p className='infoText'>Não possui uma conta?</p>
-          <p>
-            <Link to='/Register' style={{textDecoration: 'none'}}>
-              <span id='button' className='yellow-text'>Cadastre-se</span>
-            </Link>
-          </p>
-        </form>
-        </div>
+    <div className='App'>
+      <Header />
+      <form>
+        <Input
+          required
+          className='input'
+          name='userEmail'
+          type='email'
+          placeholder='Email'
+          value={userEmail}
+          onChange={handleUserEmail}
+        />
+        <Input
+          required
+          className='input'
+          name='userPassword'
+          type='password'
+          placeholder='Insira sua senha'
+          value={userPassword}
+          onChange={handleUserPassword}
+        />
+        <Button
+          className='button'
+          name='Login'
+          type='submit'
+          onClick={handleButtonLogin}
+        />
+        <p className='infoText'>Não possui uma conta?</p>
+        <p>
+          <Link to='/Register' style={{textDecoration: 'none'}}>
+            <span id='button' className='yellow-text'>Cadastre-se</span>
+          </Link>
+        </p>
+      </form>
       <Footer />
-    </Fragment>
+    </div>
+   
   );
 }
 

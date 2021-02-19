@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import Button from '../../components/button';
 import Input from '../../components/input';
@@ -79,78 +79,76 @@ const Register = () => {
   return (
     <div className='App'>
       <Header />
-      <Fragment>
-        <form>
-          <Input
-            required
-            className='input'
-            name='userName'
-            type='text'
-            placeholder='Digite seu nome'
-            value={userName}
-            onChange={handleUserName}
-          />
-          <Input
-            required
-            className='input'
-            name='userEmail'
-            type='email'
-            placeholder='Digite seu e-mail'
-            value={userEmail}
-            onChange={handleUserEmail}
-          />
-          <label className='yellow-text'>Tipo de usuário:</label>
-          <section className='inputRadio'>
-            <label htmlFor='restaurant-kitchen' >Cozinha
-              <Input
-                required
-                className='setor'
-                name='userJobRole'
-                id='restaurant-kitchen'
-                type='radio'
-                value='cozinha'
-                onChange={handleUserJobRole}
-              />
-            </label>
-            <label htmlFor='restaurant-hall' >Salão
-              <Input
-                required
-                className='setor'
-                name='userJobRole'
-                id='restaurant-hall'
-                type='radio'
-                value='salão'
-                onChange={handleUserJobRole}
-              />
-            </label>
-          </section>
-          <Input
-            required
-            className='input'
-            name='userPassword'
-            type='password'
-            placeholder='Insira sua senha'
-            value={userPassword}
-            onChange={handleUserPassword}
-          />
-          <Input
-            required
-            className='input'
-            name='userConfirmPassword'
-            type='password'
-            placeholder='Confirme sua senha'
-            value={userConfirmPassword}
-            onChange={handleUserConfirmPassword}
-          />
-          <Button
-            className='button'
-            name='Cadastrar'
-            type='submit'
-            onClick={handleButtonRegister}
-          />
-        </form>
-        <Footer />
-      </Fragment>
+      <form>
+        <Input
+          required
+          className='input'
+          name='userName'
+          type='text'
+          placeholder='Digite seu nome'
+          value={userName}
+          onChange={handleUserName}
+        />
+        <Input
+          required
+          className='input'
+          name='userEmail'
+          type='email'
+          placeholder='Digite seu e-mail'
+          value={userEmail}
+          onChange={handleUserEmail}
+        />
+        <label className='yellow-text'>Tipo de usuário:</label>
+        <section className='inputRadio'>
+          <label htmlFor='restaurant-kitchen' >Cozinha
+            <Input
+              required
+              className='setor'
+              name='userJobRole'
+              id='restaurant-kitchen'
+              type='radio'
+              value='cozinha'
+              onChange={handleUserJobRole}
+            />
+          </label>
+          <label htmlFor='restaurant-hall' >Salão
+            <Input
+              required
+              className='setor'
+              name='userJobRole'
+              id='restaurant-hall'
+              type='radio'
+              value='salão'
+              onChange={handleUserJobRole}
+            />
+          </label>
+        </section>
+        <Input
+          required
+          className='input'
+          name='userPassword'
+          type='password'
+          placeholder='Insira sua senha'
+          value={userPassword}
+          onChange={handleUserPassword}
+        />
+        <Input
+          required
+          className='input'
+          name='userConfirmPassword'
+          type='password'
+          placeholder='Confirme sua senha'
+          value={userConfirmPassword}
+          onChange={handleUserConfirmPassword}
+        />
+        <Button
+          className='button'
+          name='Cadastrar'
+          type='submit'
+          onClick={handleButtonRegister}
+        />
+      </form>
+      <Footer />
     </div>
   );
 }

@@ -29,13 +29,13 @@ const Allday = () => {
   }, [getProducts])
   
   return (
-    <div className='allday'>
+    <div className='product'>
       {
         menuAlmocoJanta.map((product)=> {
           return (
-            <div key={`product-${product.id}`} > 
-              <p>{product.name}</p> 
-              <p>{product.price}</p> 
+            <div className='card-product' key={`product-${product.id}`} > 
+              <p className='white-text'>{product.name}</p> 
+              <p className='white-text'>R$ {product.price},00</p> 
             </div>
           )
         })
