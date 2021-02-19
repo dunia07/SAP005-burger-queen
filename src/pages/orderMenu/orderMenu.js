@@ -1,18 +1,10 @@
-///import { Link } from 'react-router-dom';
-import Header from '../../components/header/innerHeader';
-//import Footer from '../../components/footer';
-import React, { useState, Fragment } from 'react';
-//import logo from '../../image/logo.png'
-//import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-//import Products from '../../components/products';
-
-import Breakfast from '../../components/cardapio/breakfast';
-import Allday from '../../components/cardapio/allday';
-
+import Header from '../../components/header/innerHeader';
 import Button from '../../components/button';
 import Input from '../../components/input';
-
+import Breakfast from '../../components/cardapio/breakfast';
+import Allday from '../../components/cardapio/allday';
 
 const OrderMenu = () => {
   const history = useHistory();
@@ -28,23 +20,12 @@ const OrderMenu = () => {
   const [userCliente, setUserCliente] = useState(''); 
   const [userMesa, setUserMesa] = useState(''); 
   
-  const handleUserCliente = (e) => {
+  const HandleUserCliente = (e) => {
     setUserCliente(e.target.value);
   };
 
-  const handleUserMesa = (e) => {
+  const HandleUserMesa = (e) => {
     setUserMesa(e.target.value);
-  };
-
-  const [menuCafe, setMenuCafe] = useState([]); 
-  const [menuAlmocoJanta, setMenuAlmocoJanta] = useState([]); 
-  
-  const handleMenuCafe = (e) => {
-    setMenuCafe(e.target.value);
-  };
-
-  const handleMenuAlmocoJanta = (e) => {
-    setMenuAlmocoJanta(e.target.value);
   };
 
   // const handleChange = (e) => {
@@ -57,42 +38,28 @@ const OrderMenu = () => {
   //   setExtras(e.target.value);
   // };
 
-  
-  const [menu, setMenu] = useState([]);
+  const [menuSelect, setMenuSelect] = useState ('Café da Manhã')
 
-  const HandleMenu = (e) => {
-    setMenu(e.target.value);
-    const menuSelect = menu.value;
-    if (menuSelect === "Resto do dia"){
-      return <Allday />
-    }
-    else if(menuSelect === "Café da Manhã"){
-      return <Breakfast />
-    }
-
+  const HandleMenuSelect = (e) => {
+    setMenuSelect(e.target.value);
   };
-
-  // const selectMenu = () => {
-  //   const menuSelect = menu.value;
-  //   if (menu === "Resto do dia"){
-  //     <Allday />
-  //   }
-  //   else if(menu === "Café da Manhã"){
-  //     <Breakfast />
-  //   }
-  // }
 
   const buttonLogout = (e) => {
     e.preventDefault();
+    localStorage.clear();
     history.push('/')
   }
   
   return (
     <div className='orderMenu'>
       <Header />
-      
-      <Fragment>
-        
+      <>
+        <Button
+          className='buttonLogout'
+          name='Sair'
+          type='submit'
+          onClick={buttonLogout}
+        />
         <section>
           <Input
             required
@@ -101,7 +68,7 @@ const OrderMenu = () => {
             type='text'
             placeholder='Nome do Cliente'
             value={userCliente}
-            onChange={handleUserCliente}
+            onChange={HandleUserCliente}
           />
           <Input
             required
@@ -110,43 +77,27 @@ const OrderMenu = () => {
             type='text'
             placeholder='Número da Mesa'
             value={userMesa}
-            onChange={handleUserMesa}
+            onChange={HandleUserMesa}
           />
         </section>
         <label className='yellow-text'>Selecione o Menu</label>
-        <select className='menu' id='menu' value={menu} onChange={HandleMenu}>
-          <option value='' selected disabled>Selecione o Menu</option>
-          <option className='selectBreakfast'>Café da Manhã</option>
-          <option classeName='SelectAllday'>Resto do Dia</option>
-        </select>
-        <Button
-          className='buttonMenu'
-          name='Café da manhã'
-          type='submit'
-          value={menuCafe}
-          onClick={handleMenuCafe}
-        />
-        <Button
-          className='buttonMenu'
-          name='Almoco / Janta'
-          type='submit'
-          value={menuAlmocoJanta}
-          onClick={handleMenuAlmocoJanta}
-        />
-               
-        <Button
-          className='buttonLogout'
-          name='Sair'
-          type='submit'
-          onClick={buttonLogout}
-        />
-      </Fragment>
-      {/* <Breakfast /> */}
-      {/* <Allday /> */}
-      
+        <select className='menu' id='menu' value={menuSelect} onChange= {HandleMenuSelect}>
+          <option value='Café da Manhã' defaultValue className='selectBreakfast' >Café da Manhã</option>
+          <option value='Resto do dia' className='SelectAllday'>Resto do Dia</option>
+        </select>   
+      </>
+     
+      <>
+      {
+        
+        (menuSelect === 'Café da Manhã') ?
+        <Breakfast />
+        :
+        <Allday />
+      }
+      </>
     </div>
   )
-    
 }
 
 export default OrderMenu;

@@ -1,6 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-// import logo from '../../image/logo.png'
-// import '../../App.css';
 import { useHistory } from "react-router-dom";
 import Button from '../../components/button';
 import Input from '../../components/input';
@@ -58,10 +56,16 @@ const Register = () => {
     .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        if(json.role === 'cozinha'){
+
+        const token = json.token
+        const email = json.email
+        const userToken = localStorage.setItem('userToken', token)
+        const userEmail = localStorage.setItem('userEmail', email)
+
+        if(userEmail!== null && userToken!== null && json.role === 'cozinha'){
           routerPendingOrders();
         }
-        else if(json.role === 'salão'){
+        else if(userEmail!== null && userToken!== null && json.role === 'salão'){
           routerOrderMenu();
         }
       })

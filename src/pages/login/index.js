@@ -1,7 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-//import logo from '../../image/logo.png'
-//import '../../App.css';
-
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/button';
@@ -53,12 +50,12 @@ const Login = () => {
         const token = json.token
         const email = json.email
         const userToken = localStorage.setItem('userToken', token)
-        const userEmail = localStorage.setItem('userId', email)
+        const userEmail = localStorage.setItem('userEmail', email)
 
         if(userEmail!== null && userToken!== null && json.role === "cozinha"){
           routerPendingOrders();
         }
-        else if(userEmail!== null && userToken!== null &&json.role === "salão"){
+        else if(userEmail!== null && userToken!== null && json.role === "salão"){
           routerOrderMenu();
         }
       })
