@@ -38,7 +38,6 @@ const OrderMenu = () => {
   //   setExtras(e.target.value);
   // };
  
-
   const [menuSelect, setMenuSelect] = useState ('Selecione o Menu')
 
   const HandleMenuSelect = (e) => {
