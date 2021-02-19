@@ -37,6 +37,11 @@ const OrderMenu = () => {
   // const handleExtras = (e) => {
   //   setExtras(e.target.value);
   // };
+ 
+  return (
+    <div className='orderMenu'>
+      <Header />
+      <Fragment>
 
   const [menuSelect, setMenuSelect] = useState ('Selecione o Menu')
 
@@ -87,6 +92,7 @@ const OrderMenu = () => {
         <Breakfast />
       }
       </>
+
     </div>
   )
 }

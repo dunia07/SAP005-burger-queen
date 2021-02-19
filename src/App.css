@@ -100,13 +100,14 @@
   
 }
 
-.buttonLogout {
+.button-logout {
   color: #339cd3;
   border: 2px solid #339cd3;
   border-radius: 5px;
   font-size: 14px;
   font-family: Roboto;
   cursor: pointer;
+  text-align: left;
 }
 
 .inputRadio {
@@ -150,6 +151,10 @@ footer, .link-footer {
   height: 7vmin;
   pointer-events: none;
 }
+
+.inner-header{
+  width: 100%;
+  border: 10px;
 
 .product {
   width: 100%;
