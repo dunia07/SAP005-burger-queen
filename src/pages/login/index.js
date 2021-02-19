@@ -49,10 +49,16 @@ const Login = () => {
     .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        if(json.role === "cozinha"){
+
+        const token = json.token
+        const email = json.email
+        const userToken = localStorage.setItem('userToken', token)
+        const userEmail = localStorage.setItem('userId', email)
+
+        if(userEmail!== null && userToken!== null && json.role === "cozinha"){
           routerPendingOrders();
         }
-        else if(json.role === "salão"){
+        else if(userEmail!== null && userToken!== null &&json.role === "salão"){
           routerOrderMenu();
         }
       })

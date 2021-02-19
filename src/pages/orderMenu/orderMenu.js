@@ -5,7 +5,11 @@ import React, { useState, Fragment } from 'react';
 //import logo from '../../image/logo.png'
 //import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-import Products from '../../components/products';
+//import Products from '../../components/products';
+
+import Breakfast from '../../components/cardapio/breakfast';
+import Allday from '../../components/cardapio/allday';
+
 import Button from '../../components/button';
 import Input from '../../components/input';
 
@@ -53,6 +57,31 @@ const OrderMenu = () => {
   //   setExtras(e.target.value);
   // };
 
+  
+  const [menu, setMenu] = useState([]);
+
+  const HandleMenu = (e) => {
+    setMenu(e.target.value);
+    const menuSelect = menu.value;
+    if (menuSelect === "Resto do dia"){
+      return <Allday />
+    }
+    else if(menuSelect === "Café da Manhã"){
+      return <Breakfast />
+    }
+
+  };
+
+  // const selectMenu = () => {
+  //   const menuSelect = menu.value;
+  //   if (menu === "Resto do dia"){
+  //     <Allday />
+  //   }
+  //   else if(menu === "Café da Manhã"){
+  //     <Breakfast />
+  //   }
+  // }
+
   const buttonLogout = (e) => {
     e.preventDefault();
     history.push('/')
@@ -85,6 +114,11 @@ const OrderMenu = () => {
           />
         </section>
         <label className='yellow-text'>Selecione o Menu</label>
+        <select className='menu' id='menu' value={menu} onChange={HandleMenu}>
+          <option value='' selected disabled>Selecione o Menu</option>
+          <option className='selectBreakfast'>Café da Manhã</option>
+          <option classeName='SelectAllday'>Resto do Dia</option>
+        </select>
         <Button
           className='buttonMenu'
           name='Café da manhã'
@@ -107,7 +141,8 @@ const OrderMenu = () => {
           onClick={buttonLogout}
         />
       </Fragment>
-      <Products />
+      {/* <Breakfast /> */}
+      {/* <Allday /> */}
       
     </div>
   )

@@ -58,10 +58,10 @@ const Register = () => {
     .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        if(json.role === "cozinha"){
+        if(json.role === 'cozinha'){
           routerPendingOrders();
         }
-        else if(json.role === "salão"){
+        else if(json.role === 'salão'){
           routerOrderMenu();
         }
       })
