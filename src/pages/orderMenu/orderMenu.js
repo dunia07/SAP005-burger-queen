@@ -5,6 +5,7 @@ import Header from '../../components/header/innerHeader';
 import Input from '../../components/input';
 import Breakfast from '../../components/cardapio/breakfast';
 import Allday from '../../components/cardapio/allday';
+import Navbar from '../../components/navbar/hallNavbar';
 
 const OrderMenu = () => {
   // const history = useHistory();
@@ -45,10 +46,11 @@ const OrderMenu = () => {
   };
  
   return (
-    <div className='orderMenu'>
+    <div className='inner-page-container'>
       <Header />
+      <Navbar />
       <>
-        <section>
+        <section className='client-data'>
           <Input
             required
             className='input'
@@ -60,7 +62,7 @@ const OrderMenu = () => {
           />
           <Input
             required
-            className='input'
+            className='table-input'
             name='userMesa'
             type='text'
             placeholder='Número da Mesa'
@@ -68,11 +70,13 @@ const OrderMenu = () => {
             onChange={HandleUserMesa}
           />
         </section>
-        <select className='yellow-text' id='menu' value={menuSelect} onChange= {HandleMenuSelect}>
-          <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
-          <option value='Resto do dia'>Almoço/Jantar</option>
-          <option value='Café da Manhã'>Café da Manhã</option>
-        </select>   
+        <div className='select-menu'>
+          <select className='filter-select-menu' value={menuSelect} onChange= {HandleMenuSelect}>
+            <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
+            <option value='Resto do dia'>Almoço/Jantar</option>
+            <option value='Café da Manhã'>Café da Manhã</option>
+          </select>
+        </div>   
       </>
      
       <>
@@ -87,7 +91,6 @@ const OrderMenu = () => {
         <Breakfast />
       }
       </>
-
     </div>
   )
 }

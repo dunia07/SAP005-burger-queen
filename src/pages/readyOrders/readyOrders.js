@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
+import Header from '../../components/header/innerHeader'
+import Navbar from '../../components/navbar/hallNavbar';
 
 const ReadyOrders = () => {
   return (
     <div className='readyOrders'>
+      <Header />
+      <Navbar />
       <p>
         <Link to='/order-menu'>
           <span id='button' className='textRegister'>Menu Pedidos</span>

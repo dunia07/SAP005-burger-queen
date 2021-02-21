@@ -3,8 +3,8 @@ import logo from '../../image/logo.png';
 
 function Header () {
     return(
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
+      <header>
+        <img src={logo} className='logo' alt='logo' />
       </header>
     )
 }
