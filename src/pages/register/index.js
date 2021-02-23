@@ -59,13 +59,17 @@ const Register = () => {
 
         const token = json.token
         const email = json.email
+        const name  = json.name
+        const role = json.role
         const userToken = localStorage.setItem('userToken', token)
         const userEmail = localStorage.setItem('userEmail', email)
+        const userName = localStorage.setItem('userName', name)
+        const userRole = localStorage.setItem('userRole', role)
 
-        if(userEmail!== null && userToken!== null && json.role === 'cozinha'){
+        if(userRole!== null && userName!== null && userEmail!== null && userToken!== null && json.role === 'cozinha'){
           routerPendingOrders();
         }
-        else if(userEmail!== null && userToken!== null && json.role === 'salão'){
+        else if(userRole!== null && userName!== null && userEmail!== null && userToken!== null && json.role === 'salão'){
           routerOrderMenu();
         }
       })
