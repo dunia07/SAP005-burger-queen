@@ -1,40 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../button';
 import Input from '../input';
-//import Button from '../../components/button';
 
 const Breakfast = () => {
   const [menuCafe, setMenuCafe] = useState([]);
   const token = localStorage.getItem('userToken') 
-
-  // const [userCliente, setUserCliente] = useState(''); 
-  // const [userMesa, setUserMesa] = useState(''); 
-  // const cliente = localStorage.setItem('userCliente', userCliente)
-  // const mesa = localStorage.setItem('userMesa', userMesa)
-  // const name = localStorage.getItem('userName')
-
-  // const HandleUserCliente = (e) => {
-  //   setUserCliente(e.target.value);
-  // };
-
-  // const HandleUserMesa = (e) => {
-  //   setUserMesa(e.target.value);
-  // };
-
-  // const listResume = []
-  // const listValue = []
-
-  // const [itemPedido, setItemPedido] = useState([]);
-
-  // const HandleAddPedido = (addProduct) => {
-  //   setItemPedido(itemPedido, addProduct);
-  // }
-
-  // const HandlePedido = (e) => {
-  //   e.preventDefault();
-  //   localStorage.getItem('userCliente')
-  //   localStorage.getItem('userMesa')
-  // }
+  const nameAtendente = localStorage.getItem('userName')
 
   const HandleAddPedido = (e) => {
     e.preventDefault()
@@ -51,6 +22,10 @@ const Breakfast = () => {
 
     let resumePedido =[] 
 
+    // console.log(pedido)
+
+    setItemPedido([...itemPedido, pedido])
+
     if (localStorage.hasOwnProperty('resumePedido')) {
       resumePedido = JSON.parse(localStorage.getItem('resumePedido'))
     }
@@ -59,33 +34,24 @@ const Breakfast = () => {
 
   }
 
-
-  const [userCliente, setUserCliente] = useState(''); 
-  const [userMesa, setUserMesa] = useState(''); 
+  const [client, setClient] = useState(''); 
+  const [table, setTable] = useState(''); 
+  const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
   const [itemPedido, setItemPedido] = useState([]);
-  const [order, setOrder] = useState([])
+  // const [order, setOrder] = useState([])
 
+  // console.log(userCliente.client, userMesa.table, order)
 
-  const cliente = localStorage.setItem('userCliente', userCliente)
-  const mesa = localStorage.setItem('userMesa', userMesa)
-  const nameAtendente = localStorage.getItem('userName')
+  console.log(itemPedido)
+
+  const cliente = localStorage.setItem('userCliente', client)
+  const mesa = localStorage.setItem('userMesa', table)
   
-
-  function handleClick(product) {
-    console.log(product.id);
-    const obj = {
-      id: product.id,
-      qtd:0,
-    }
-       
-    setOrder((prevState) => [...prevState, obj]);
+  const handleClick = () => {
+    setMesaPedido([{client, table}]);
+    console.log(mesaPedido)
   }
-  
-  // setItems(
-  //   items.map((item, index) => {
-  //     item.id === id ? newItem : item
-  //   })
-  // )
+   
   const getProducts = useCallback (() => {
             
     fetch('https://lab-api-bq.herokuapp.com/products/', {
@@ -122,8 +88,7 @@ const Breakfast = () => {
             name='userCliente'
             type='text'
             placeholder='Nome do Cliente'
-            value={userCliente}
-            onChange={(e) => setUserCliente (e.target.value)}
+            onChange={(e) => setClient (e.target.value)}
           />
           <Input
             required
@@ -131,18 +96,23 @@ const Breakfast = () => {
             name='userMesa'
             type='text'
             placeholder='Número da Mesa'
-            value={userMesa}
-            onChange={(e) => setUserMesa (e.target.value)}
+            onChange={(e) => setTable (e.target.value)}
+          />
+
+          <Button 
+          className='add'
+          name='+'
+          type='submit'
+          onClick= {(event) => handleClick(event)}
           />
         </section>
       </div>
 
       <div className='show-product'>      
-          {/* className='card-product' key={`product-${product.id}` */}
         {
           menuCafe.map((product) => {
             return (
-              <div className='card-product' id={product.id} name={product.name} price={product.price} 
+              <div className='card-product' key={`product-${product.id}`} id={product.id} name={product.name} price={product.price} 
                 onClick= {HandleAddPedido}>            
                 <p className='white-text'>{product.name}</p> 
                 <p className='white-text'>R$ {product.price},00</p> 
@@ -165,28 +135,27 @@ const Breakfast = () => {
       
         <p>RESUMO DO PEDIDO</p>
         <p>Atendente: {nameAtendente}</p>
-        <p>Cliente: {userCliente} - Mesa: {userMesa}</p>
-        {/* <p> {localStorage.getItem('product.id')} {localStorage.getItem('product.price')} </p>  */}
+        <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p>      
 
-        {
-          itemPedido.map((product) => (
-
-            
-              <div className='resume' name={product.name} id={product.id} price={product.price}></div>    
-            )
-          )
-        }  
+        {itemPedido !== [] && 
+          <div>
+            <ul>
+              {itemPedido.map((product, index) => (
+                  <>
+                    <li>
+                      <label key={index}> {product.name} R$ {product.price},00 </label>
+                    </li>
+                  </>
+                  )
+                )
+              }
+            </ul>
+          </div>
+        }
 
         <div className='show-total'>
           <p>TOTAL R$ {localStorage.getItem('valueTotal')}</p>
         </div>
-
-        <Button 
-          className='button'
-          name='Adicionar'
-          type='submit'
-          onClick= {handleClick}
-        />
 
       </div>     
        
