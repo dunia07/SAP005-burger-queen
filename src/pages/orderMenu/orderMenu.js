@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/innerHeader';
 import Button from '../../components/button';
-// import Input from '../../components/input';
+//import Input from '../../components/input';
 import Breakfast from '../../components/cardapio/breakfast';
 import Allday from '../../components/cardapio/allday';
 import Navbar from '../../components/navbar/hallNavbar';
@@ -14,26 +14,57 @@ const OrderMenu = () => {
   setMenuSelect(e.target.value);
   };
    
-   
+
+
+  // //const [menuCafe, setMenuCafe] = useState([]);
+  // //const token = localStorage.getItem('userToken') 
   // const nameAtendente = localStorage.getItem('userName')
+
+  // const HandleAddPedido = (e) => {
+  //   e.preventDefault()
+  //   const product = e.target.parentNode;
+  //   const idProduct = product.getAttribute('id')
+  //   const nameProduct = product.getAttribute('name')
+  //   const priceProduct = product.getAttribute('price')
+
+  //   const pedido = {
+  //     id: idProduct,
+  //     name: nameProduct,
+  //     price: priceProduct,
+  //   }
+
+  //   let resumePedido =[] 
+
+  //   // console.log(pedido)
+
+  //   setItemPedido([...itemPedido, pedido])
+
+  //   if (localStorage.hasOwnProperty('resumePedido')) {
+  //     resumePedido = JSON.parse(localStorage.getItem('resumePedido'))
+  //   }
+  //   resumePedido.push({pedido})
+  //   localStorage.setItem('resumePedido', JSON.stringify(resumePedido))
+
+  // }
 
   // const [client, setClient] = useState(''); 
   // const [table, setTable] = useState(''); 
   // const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
   // const [itemPedido, setItemPedido] = useState([]);
 
-  // console.log(userCliente.client, userMesa.table, order)
-  //console.log(itemPedido)
+  // const [order, setOrder] = useState([])
 
-  // localStorage.setItem('userCliente', client)
-  // localStorage.setItem('userMesa', table)
+  // console.log(userCliente.client, userMesa.table, order)
+
+  // console.log(itemPedido)
+
+  // const cliente = localStorage.setItem('userCliente', client)
+  // const mesa = localStorage.setItem('userMesa', table)
   
   // const handleClick = () => {
   //   setMesaPedido([{client, table}]);
   //   console.log(mesaPedido)
   // }
-
-
 
   // function handleClick(product) {
   //   console.log(product.id);
@@ -71,13 +102,12 @@ const OrderMenu = () => {
         
   // }
 
-
   return (
-    <div className='inner-page-container'>
-      <Header />
-      <Navbar />
-      <>
-      {/* <section className='client-data'>
+    <div className='order'>
+      <div className='order-menu'>
+        <Header />
+        <Navbar />
+        {/* <section>
           <Input
             required
             className='input'
@@ -88,7 +118,7 @@ const OrderMenu = () => {
           />
           <Input
             required
-            className='table-input'
+            className='input'
             name='userMesa'
             type='text'
             placeholder='Número da Mesa'
@@ -101,32 +131,28 @@ const OrderMenu = () => {
           type='submit'
           onClick= {(event) => handleClick(event)}
           />
-
         </section> */}
-    
-        <div className='select-menu'>
-          <select className='filter-select-menu' value={menuSelect} onChange= {HandleMenuSelect}>
-            <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
-            <option value='Resto do dia'>Almoço/Jantar</option>
-            <option value='Café da Manhã'>Café da Manhã</option>
-          </select>
-        </div>   
-      </>
-     
-      <>
-      {
+
+        <select className='yellow-text' id='menu' value={menuSelect} onChange= {HandleMenuSelect}>
+          <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
+          <option value='Resto do dia'>Almoço/Jantar</option>
+          <option value='Café da Manhã'>Café da Manhã</option>
+        </select>   
         
-        (menuSelect === 'Selecione o Menu') ?
-        <Allday />
-        :
-        (menuSelect === 'Resto do dia') ?
-        <Allday />
-        :
-        <Breakfast />
-      }
-      </>
-    </div>
-     
+        <>
+          {
+            
+            (menuSelect === 'Selecione o Menu') ?
+            <Allday />
+            :
+            (menuSelect === 'Resto do dia') ?
+            <Allday />
+            :
+            <Breakfast />
+          }
+        </>
+
+      </div>
 
       {/* <div className='show-resume'>  
       
@@ -164,7 +190,6 @@ const OrderMenu = () => {
       />
 
     </div>  
-
   )
 }
 
