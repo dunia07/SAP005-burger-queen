@@ -35,6 +35,8 @@ const Allday = () => {
           return (
             <div className='card-product' key={`product-${product.id}`} > 
               <p className='white-text'>{product.name}</p> 
+              <p className='white-text'>{product.flavor}</p>
+              <p className='white-text'> {product.complement}</p>
               <p className='white-text'>R$ {product.price},00</p> 
             </div>
           )
