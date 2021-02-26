@@ -25,6 +25,7 @@ const Breakfast = () => {
     // console.log(pedido)
 
     setItemPedido([...itemPedido, pedido])
+    // HandleSomaValor() 
 
     if (localStorage.hasOwnProperty('resumePedido')) {
       resumePedido = JSON.parse(localStorage.getItem('resumePedido'))
@@ -44,14 +45,56 @@ const Breakfast = () => {
 
   console.log(itemPedido)
 
-  const cliente = localStorage.setItem('userCliente', client)
-  const mesa = localStorage.setItem('userMesa', table)
+  localStorage.setItem('userCliente', client)
+  localStorage.setItem('userMesa', table)
   
   const handleClick = () => {
     setMesaPedido([{client, table}]);
     console.log(mesaPedido)
   }
    
+
+  const [contador, setContador] = useState(0);
+
+  const HandleSoma = () => {
+    setContador(contador + 1)
+  }
+
+  console.log(contador)
+
+  const HandleSubtrai = () => {
+    setContador(contador -1)
+  }
+
+  // const [somaItem, setSomaItem] = useState([]);
+  // const [subtraiItem, setSubtraiItem] = useState([]);
+
+
+  const [valorTotal, setValorTotal] = useState([0]);
+
+
+
+  // useEffect (() => {
+  //     const soma = itemPedido.reduce((valorAnterior, valorAtual) => valorAnterior + valorAtual.price, 0)
+  //      setValorTotal(soma)
+  //   }, [itemPedido])
+  // }
+
+  const HandleSomaValor = (valorArray) => {
+    const soma = ((valorInicial, valorAdd) => valorInicial + valorAdd);
+    return valorArray.reduce(soma);
+    // itemPedido.forEach(product => {
+    //   const valorInicial = Number(product.price)
+    //   //valorTotal.reduce((valorInicial, valorAdd) => valorInicial + valorAdd, 0)
+    //   setValorTotal(valorInicial + valorTotal)
+    // }) 
+        
+  }
+
+  console.log(HandleSomaValor)
+
+
+
   const getProducts = useCallback (() => {
             
     fetch('https://lab-api-bq.herokuapp.com/products/', {
@@ -143,7 +186,27 @@ const Breakfast = () => {
               {itemPedido.map((product, index) => (
                   <>
                     <li>
-                      <label key={index}> {product.name} R$ {product.price},00 </label>
+                      <label key={index}> {product.name} 
+                      
+                      <Button 
+                        className='add'
+                        name='+'
+                        type='submit'
+                        onClick= {(event) => HandleSoma(event)}      
+                      />
+
+                      <Button 
+                        className='add'
+                        name='-'
+                        type='submit'
+                        onClick= {(event) => HandleSubtrai(event)}      
+                      />
+                      
+                      R$ {product.price},00 
+                      
+
+                      
+                      </label>
                     </li>
                   </>
                   )
@@ -154,7 +217,7 @@ const Breakfast = () => {
         }
 
         <div className='show-total'>
-          <p>TOTAL R$ {localStorage.getItem('valueTotal')}</p>
+          <p>TOTAL R$ {HandleSomaValor(valorTotal)}</p>
         </div>
 
       </div>     

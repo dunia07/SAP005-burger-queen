@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/innerHeader';
 import Button from '../../components/button';
-//import Input from '../../components/input';
+// import Input from '../../components/input';
 import Breakfast from '../../components/cardapio/breakfast';
 import Allday from '../../components/cardapio/allday';
 
@@ -13,16 +13,25 @@ const OrderMenu = () => {
   setMenuSelect(e.target.value);
   };
    
-  //const [userCliente, setUserCliente] = useState(''); 
-  //const [userMesa, setUserMesa] = useState(''); 
-  // const cliente = localStorage.setItem('userCliente', userCliente)
-  // const mesa = localStorage.setItem('userMesa', userMesa)
+   
   // const nameAtendente = localStorage.getItem('userName')
-  // const [order, setOrder] = useState([])
- 
- 
-  //const [itemPedido, setItemPedido] = useState([]);
-  //const [valorTotal, setValorTotal] = useState(0);
+
+  // const [client, setClient] = useState(''); 
+  // const [table, setTable] = useState(''); 
+  // const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
+  // const [itemPedido, setItemPedido] = useState([]);
+
+  // console.log(userCliente.client, userMesa.table, order)
+  //console.log(itemPedido)
+
+  // localStorage.setItem('userCliente', client)
+  // localStorage.setItem('userMesa', table)
+  
+  // const handleClick = () => {
+  //   setMesaPedido([{client, table}]);
+  //   console.log(mesaPedido)
+  // }
+
 
 
   // function handleClick(product) {
@@ -41,9 +50,6 @@ const OrderMenu = () => {
   //   })
   // )
 
-
-
-
   // const HandleAddPedido = (product) => {
   //   localStorage.getItem('userName')
   //   localStorage.getItem('userCliente')
@@ -54,10 +60,7 @@ const OrderMenu = () => {
   //   HandleSomaValor()
   // }
   // console.log(itemPedido)
-  
-  
-
- 
+   
   // const HandleSomaValor = () => {
   //   itemPedido.forEach(product => {
   //     const valorInicial = Number(product.price)
@@ -66,17 +69,6 @@ const OrderMenu = () => {
   //   }) 
         
   // }
-
-  // console.log(HandleSomaValor)
-
-  // const HandlePedido = (e) => {
-  //   e.preventDefault();
-  //   sessionStorage.getItem('userCliente')
-  //   sessionStorage.getItem('userMesa')
-  // }
-  
-
-  
 
 
   return (
@@ -90,8 +82,7 @@ const OrderMenu = () => {
             name='userCliente'
             type='text'
             placeholder='Nome do Cliente'
-            value={userCliente}
-            onChange={(e) => setUserCliente (e.target.value)}
+            onChange={(e) => setClient (e.target.value)}
           />
           <Input
             required
@@ -99,8 +90,14 @@ const OrderMenu = () => {
             name='userMesa'
             type='text'
             placeholder='Número da Mesa'
-            value={userMesa}
-            onChange={(e) => setUserMesa (e.target.value)}
+            onChange={(e) => setTable (e.target.value)}
+          />
+
+          <Button 
+          className='add'
+          name='+'
+          type='submit'
+          onClick= {(event) => handleClick(event)}
           />
         </section> */}
 
@@ -123,7 +120,35 @@ const OrderMenu = () => {
           }
         </>
 
-      </div>  
+      </div>
+
+      {/* <div className='show-resume'>  
+      
+        <p>RESUMO DO PEDIDO</p>
+        <p>Atendente: {nameAtendente}</p>
+        <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p>      
+
+        {itemPedido !== [] && 
+          <div>
+            <ul>
+              {itemPedido.map((product, index) => (
+                  <>
+                    <li>
+                      <label key={index}> {product.name} R$ {product.price},00 </label>
+                    </li>
+                  </>
+                  )
+                )
+              }
+            </ul>
+          </div>
+        }
+
+        <div className='show-total'>
+          <p>TOTAL R$ {localStorage.getItem('valueTotal')}</p>
+        </div>
+
+      </div>        */}
 
       <Button 
         className='button'
