@@ -66,7 +66,8 @@ const Login = () => {
   }
   
   return (
-    <div className='App'>
+    <>
+    <div className='page-container'>
       <Header />
       <form>
         <Input
@@ -93,16 +94,16 @@ const Login = () => {
           type='submit'
           onClick={handleButtonLogin}
         />
-        <p className='infoText'>Não possui uma conta?</p>
+        <p className='gray-text'>Não possui uma conta?</p>
         <p>
           <Link to='/Register' style={{textDecoration: 'none'}}>
-            <span id='button' className='yellow-text'>Cadastre-se</span>
+            <span className='yellow-text'>Cadastre-se</span>
           </Link>
         </p>
       </form>
       <Footer />
     </div>
-   
+    </>
   );
 }
 

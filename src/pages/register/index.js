@@ -81,7 +81,8 @@ const Register = () => {
   }, []);
 
   return (
-    <div className='App'>
+    <>
+    <div className='page-container'>
       <Header />
       <form>
         <Input
@@ -103,11 +104,11 @@ const Register = () => {
           onChange={handleUserEmail}
         />
         <label className='yellow-text'>Tipo de usuário:</label>
-        <section className='inputRadio'>
+        <section className='input-radio'>
           <label htmlFor='restaurant-kitchen' >Cozinha
             <Input
               required
-              className='setor'
+              className='role'
               name='userJobRole'
               id='restaurant-kitchen'
               type='radio'
@@ -118,7 +119,7 @@ const Register = () => {
           <label htmlFor='restaurant-hall' >Salão
             <Input
               required
-              className='setor'
+              className='role'
               name='userJobRole'
               id='restaurant-hall'
               type='radio'
@@ -154,6 +155,7 @@ const Register = () => {
       </form>
       <Footer />
     </div>
+    </>
   );
 }
 

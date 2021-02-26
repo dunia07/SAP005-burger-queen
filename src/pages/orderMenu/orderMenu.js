@@ -4,6 +4,7 @@ import Button from '../../components/button';
 // import Input from '../../components/input';
 import Breakfast from '../../components/cardapio/breakfast';
 import Allday from '../../components/cardapio/allday';
+import Navbar from '../../components/navbar/hallNavbar';
 
 const OrderMenu = () => {
   
@@ -72,10 +73,11 @@ const OrderMenu = () => {
 
 
   return (
-    <div className='order'>
-      <div className='order-menu'>
-        <Header />
-        {/* <section>
+    <div className='inner-page-container'>
+      <Header />
+      <Navbar />
+      <>
+      {/* <section className='client-data'>
           <Input
             required
             className='input'
@@ -86,7 +88,7 @@ const OrderMenu = () => {
           />
           <Input
             required
-            className='input'
+            className='table-input'
             name='userMesa'
             type='text'
             placeholder='Número da Mesa'
@@ -99,28 +101,32 @@ const OrderMenu = () => {
           type='submit'
           onClick= {(event) => handleClick(event)}
           />
+
         </section> */}
-
-        <select className='yellow-text' id='menu' value={menuSelect} onChange= {HandleMenuSelect}>
-          <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
-          <option value='Resto do dia'>Almoço/Jantar</option>
-          <option value='Café da Manhã'>Café da Manhã</option>
-        </select>   
+    
+        <div className='select-menu'>
+          <select className='filter-select-menu' value={menuSelect} onChange= {HandleMenuSelect}>
+            <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
+            <option value='Resto do dia'>Almoço/Jantar</option>
+            <option value='Café da Manhã'>Café da Manhã</option>
+          </select>
+        </div>   
+      </>
+     
+      <>
+      {
         
-        <>
-          {
-            
-            (menuSelect === 'Selecione o Menu') ?
-            <Allday />
-            :
-            (menuSelect === 'Resto do dia') ?
-            <Allday />
-            :
-            <Breakfast />
-          }
-        </>
-
-      </div>
+        (menuSelect === 'Selecione o Menu') ?
+        <Allday />
+        :
+        (menuSelect === 'Resto do dia') ?
+        <Allday />
+        :
+        <Breakfast />
+      }
+      </>
+    </div>
+     
 
       {/* <div className='show-resume'>  
       
@@ -158,6 +164,7 @@ const OrderMenu = () => {
       />
 
     </div>  
+
   )
 }
 
