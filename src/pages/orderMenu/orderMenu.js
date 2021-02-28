@@ -182,12 +182,12 @@ const OrderMenu = () => {
 
       </div>        */}
 
-      <Button 
+      {/* <Button 
         className='button'
         name='Finalizar Pedido'
         type='submit'
         onClick= {() => { }}
-      />
+      /> */}
 
     </div>  
   )
