@@ -14,14 +14,12 @@ const Breakfast = () => {
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
   const [itemQuant, setItemQuant] = useState([]);
-
+  const [order, setOrder] = useState({});
 
   //const [valorTotal, setValorTotal] = useState([0]);
   //const [order, setOrder] = useState([])
 
-  const [order, setOrder] = useState({});
-
-
+  //const [order, setOrder] = useState({});
   // const [precoTotal, setPrecoTotal] = useState([]);
   // const [precosProdutos, setPrecosProdutos] = useState([]);
 
@@ -44,61 +42,55 @@ const Breakfast = () => {
       id: idProduct,
       name: nameProduct,
       price: priceProduct,
+      qtd: 1
     }
 
-    let resumePedido =[] 
+    addPedido(pedido)
+    
+    //let resumePedido =[] 
 
     // console.log(pedido)
 
-    setItemPedido([...itemPedido, pedido])
-    //setPrecosProdutos([...precosProdutos, product.price]);
-    //setItemValor([...itemValor, pedido])
-    setItemQuant([...itemQuant, pedido])
+    // setItemPedido([...itemPedido, pedido])
+    // setItemQuant([...itemQuant, pedido])
     // HandleSomaValor() 
 
-    
-
-    if (localStorage.hasOwnProperty('resumePedido')) {
-      resumePedido = JSON.parse(localStorage.getItem('resumePedido'))
-    }
-    resumePedido.push({pedido})
-    localStorage.setItem('resumePedido', JSON.stringify(resumePedido))
+    // if (localStorage.hasOwnProperty('resumePedido')) {
+    //   resumePedido = JSON.parse(localStorage.getItem('resumePedido'))
+    // }
+    // resumePedido.push({pedido})
+    // localStorage.setItem('resumePedido', JSON.stringify(resumePedido))
 
   }
 
-  const handleClick = () => {
+  const HandleClienteMesa = () => {
     setMesaPedido([{client, table}]);
+    limparInput()
     console.log(mesaPedido)
   }
    
-  // useEffect (() => {
-  //     const soma = itemPedido.reduce((valorAnterior, valorAtual) => valorAnterior + valorAtual.price, 0)
-  //      setValorTotal(soma)
-  //   }, [itemPedido])
-  // }
-
-  const HandleSomaValor = () => {
-    //setPrecoTotal(precosProdutos.reduce((total, num) => total + num, 0));
-    
-    // itemPedido.forEach(product => {
-    //   const valorInicial = Number(product.price)
-    //   setItemValor(valorInicial.reduce((total, num) => total + num, 0));
-
-    // })
-
-    // const soma = ((valorInicial, valorAdd) => valorInicial + valorAdd);
-    // return itemValor.reduce(soma);
-
-    itemPedido.forEach(product => {
-      const valorInicial = Number(product.price)
-      //valorTotal.reduce((valorInicial, valorAdd) => valorInicial + valorAdd, 0)
-      setItemValor(valorInicial + itemValor)
-      
-    }) 
-        
+  const limparInput = () => {
+    const inputs = document.querySelectorAll('input');
+    [].map.call(inputs, (entrada) => (entrada.value = ''));
   }
 
-  console.log(setItemValor)
+  const addPedido = (product) => {
+    const newArray = itemPedido
+    newArray.push(product)
+    setItemPedido(newArray)
+    somaValor()
+  }
+
+  const somaValor = () => {   
+    itemPedido.forEach(product => {
+      const valorInicial = Number(product.price)
+      setItemValor(valorInicial + itemValor)
+    }) 
+  }
+
+  // const HandleOrder = (e) => {
+  //   setOrder({ ...order, client: e.target.value, table: e.target.value, products: itemPedido })
+  // };
 
 
 
@@ -154,43 +146,43 @@ const Breakfast = () => {
   //   }
 
   //   setOrder({ ...order, products: arrayProdutos });
-  //   alert(product.name + "adicionado!");
+  //   alert(product.name + 'adicionado!');
   // };
 
 
-  const handleSubmit = () => {
-    fetch("https://lab-api-bq.herokuapp.com/orders", {
-      method: "POST",
+  const HandleSubmit = () => {
+    fetch('https://lab-api-bq.herokuapp.com/orders', {
+      method: 'POST',
       headers: {
         'accept': 'application/json',
-        // "Content-Type": "application/json",
+        //'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
-      body: JSON.stringify(order),
-    })
-      .then((response) => {
-        response.json().then((pedido) => {
-          console.log(pedido);
-          //setOrder({});
-          setItemPedido([]);
-          //setItemValor([]);
-          setItemQuant([]);
-          //setPrecoTotal([]);
-          //setPrecosProdutos([]);
-          // setProdutoExcluído([]);
-          clearInput();
-          alert("Pedido Criado com Sucesso!");
-        });
+
+      // body: JSON.stringify(order),
+      body: JSON.stringify({
+        'client': client,
+        'table': table, 
+        'products': 
+          itemPedido.map((product) => (
+            {
+              'id': Number(product.id),
+              'qtd': 1
+            }
+          ))
       })
-      .catch(() => {
-        alert("Preencha todos os campos!");
-      });
+    })
+    .then((response) => response.json()
+      .then((json) => {
+        console.log(json);
+        // setOrder({ ...order, client:'', table:'', products: itemPedido })
+        alert('Pedido Criado com Sucesso!');
+      })
+    )
+      
   };
 
-  function clearInput() {
-    const inputs = document.querySelectorAll("input");
-    [].map.call(inputs, (entrada) => (entrada.value = ""));
-  }
+  
 
   return (
     <div className='product'>
@@ -219,7 +211,7 @@ const Breakfast = () => {
           className='add'
           name='+'
           type='submit'
-          onClick= {(event) => handleClick(event)}
+          onClick= {(event) => HandleClienteMesa(event)}
           />
         </section>
       </div>
@@ -230,28 +222,10 @@ const Breakfast = () => {
             return (
               <div className='card-product' key={product.id} id={product.id} name={product.name} price={product.price}
                 onClick ={HandleAddPedido}>            
-                {/* <Input
-                  className='add-btn'
-                  id={product.name}
-                  type='image'
-                  alt='add-button'               
-                  onClick={() => {
-                      setItemPedido([...itemPedido, {'name': menuCafe[index].name, 'price': menuCafe[index].price}]);
-                      setItemValor([...itemValor, menuCafe[index].price]);
-                      setItemQuant([...itemQuant, {'id': menuCafe[index].id, 'qtd': 1}]);
-                  }}
-                /> */}
-                
+               
                 <p className='white-text'>{product.name}</p> 
                 <p className='white-text'>R$ {product.price},00</p> 
-                {/* <Button 
-                  className='add'
-                  name='+'
-                  type='submit'
-                  onClick= {() => {
-                    console.log('clicou produto')
-                  }}      
-                /> */}
+           
               </div>
             )
           })
@@ -288,6 +262,7 @@ const Breakfast = () => {
                           if(product.name === itemPedido[index].name) {
                             itemPedido[index].qtd++; 
                             setItemPedido([...itemPedido]);
+                            somaValor()
                           }
                         }}
                       />
@@ -332,16 +307,17 @@ const Breakfast = () => {
         }
 
         <div className='show-total'>
-
-          <button className="bnt" onClick={() => HandleSomaValor()}>SOMAR</button>
-
-          {/* <h4>R$ {precoTotal},00</h4> */}
-
+      
           <p>R$ {itemValor}</p>
 
-          <button className="bnt" onClick={() => handleSubmit()}>FINALIZAR</button>
-          {/* <p>TOTAL R$ {HandleSomaValor(itemValor)}</p> */}
-         
+          {/* <button className='bnt' onClick={() => HandleSubmit()}>FINALIZAR</button>  */}
+
+          <Button 
+            className='button'
+            name='Finalizar Pedido'
+            type='submit'
+            onClick= {() => {HandleSubmit()}}
+          />     
         </div>
 
       </div>     
