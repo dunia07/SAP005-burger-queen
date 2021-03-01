@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/innerHeader';
-import Button from '../../components/button';
 import Breakfast from '../../components/cardapio/breakfast';
 import Allday from '../../components/cardapio/allday';
 import Navbar from '../../components/navbar/hallNavbar';
