@@ -13,16 +13,13 @@ const Breakfast = () => {
   const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
-  const [itemQuant, setItemQuant] = useState([]);
-  const [order, setOrder] = useState({});
 
-  //const [valorTotal, setValorTotal] = useState([0]);
+  //const [count, setCount] = useState(itemValor)
+  //const [itemQuant, setItemQuant] = useState([]);
+  
   //const [order, setOrder] = useState([])
-
   //const [order, setOrder] = useState({});
-  // const [precoTotal, setPrecoTotal] = useState([]);
-  // const [precosProdutos, setPrecosProdutos] = useState([]);
-
+ 
   // console.log(userCliente.client, userMesa.table, order)
 
   console.log(itemPedido)
@@ -46,6 +43,10 @@ const Breakfast = () => {
     }
 
     addPedido(pedido)
+
+    somaValor()
+
+    
     
     //let resumePedido =[] 
 
@@ -78,7 +79,6 @@ const Breakfast = () => {
     const newArray = itemPedido
     newArray.push(product)
     setItemPedido(newArray)
-    somaValor()
   }
 
   const somaValor = () => {   
@@ -87,6 +87,25 @@ const Breakfast = () => {
       setItemValor(valorInicial + itemValor)
     }) 
   }
+
+  const subtraiValor = () => {   
+    itemPedido.forEach(product => {
+      const valorInicial = Number(product.price)
+      setItemValor(valorInicial - itemValor)
+    }) 
+  }
+
+  // function Counter ({initialCount}) {   
+  //   const [count, setCount] = useState(initialCount)
+  //   return (
+  //     <>
+  //       Count: {count}
+  //       <button onClick={() => setCount(initialCount)}>Reset</button>
+  //       <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
+  //       <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
+  //     </>
+  //   )  
+  // }
 
   // const HandleOrder = (e) => {
   //   setOrder({ ...order, client: e.target.value, table: e.target.value, products: itemPedido })
@@ -119,47 +138,15 @@ const Breakfast = () => {
   }, [getProducts])
 
 
-  // const HandleAddPedido = (product) => {
-  //   setItemPedido([...itemPedido, product]);
-  //   setPrecosProdutos([...precosProdutos, product.price]);
-  //   const produtoPedido = itemPedido.map((product) => {
-  //     return {
-  //       id: product.id,
-  //       qtd: 1,
-  //       name: product.name,
-  //       price: product.price,
-  //     };
-  //   });
-
-  //   const qtd = produtoPedido.reduce(function (r, a) {
-  //     r[a.id] = r[a.id] || [];
-  //     r[a.id].push(a);
-  //     return r;
-  //   }, Object.create(null));
-
-  //   const arrayProdutos = [];
-  //   for (const [key, value] of Object.entries(qtd)) {
-  //     arrayProdutos.push({
-  //       id: key,
-  //       qtd: value.length,
-  //     });
-  //   }
-
-  //   setOrder({ ...order, products: arrayProdutos });
-  //   alert(product.name + 'adicionado!');
-  // };
-
-
   const HandleSubmit = () => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        //'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
 
-      // body: JSON.stringify(order),
       body: JSON.stringify({
         'client': client,
         'table': table, 
@@ -175,14 +162,11 @@ const Breakfast = () => {
     .then((response) => response.json()
       .then((json) => {
         console.log(json);
-        // setOrder({ ...order, client:'', table:'', products: itemPedido })
         alert('Pedido Criado com Sucesso!');
       })
     )
       
   };
-
-  
 
   return (
     <div className='product'>
@@ -220,7 +204,11 @@ const Breakfast = () => {
         {
           menuCafe.map((product, index) => {
             return (
-              <div className='card-product' key={product.id} id={product.id} name={product.name} price={product.price}
+              <div className='card-product' 
+                key={product.id} 
+                id={product.id} 
+                name={product.name} 
+                price={product.price}
                 onClick ={HandleAddPedido}>            
                
                 <p className='white-text'>{product.name}</p> 
@@ -252,7 +240,12 @@ const Breakfast = () => {
                       <label key={index}> {product.name} R$ {product.price},00 
                       {/* {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price*product.qtd)} */}
                       </label>
-
+                      <>
+                        {/* Count: {count} */}
+                        {/* <button onClick={() => setItemValor(itemValor)}>Reset</button> */}
+                        {/* <button onClick={() => setItemValor(prevCount => prevCount - 1)}>-</button>
+                        <button onClick={() => setItemValor(prevCount => prevCount + 1)}>+</button> */}
+                      </>
                       <input
                         className='input-quantidade'
                         id='aumentar-qtd'
@@ -267,7 +260,7 @@ const Breakfast = () => {
                         }}
                       />
 
-                      <label>{product.qtd}</label>
+                      <button>{product.qtd}</button>
 
                       <input 
                         className='input-quantidade'
@@ -278,6 +271,7 @@ const Breakfast = () => {
                           if(product.qtd > 1 && product.name === itemPedido[index].name) {
                             itemPedido[index].qtd--; 
                             setItemPedido([...itemPedido]);
+                            subtraiValor()
                           } else if(product.name === itemPedido[index].name && product.qtd === 1) {
                             itemPedido.splice(index, 1);
                             setItemPedido([...itemPedido]);
@@ -308,7 +302,7 @@ const Breakfast = () => {
 
         <div className='show-total'>
       
-          <p>R$ {itemValor}</p>
+          <p> Total Pedido: R$ {itemValor}</p>
 
           {/* <button className='bnt' onClick={() => HandleSubmit()}>FINALIZAR</button>  */}
 
