@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import Button from '../button';
 import Input from '../input';
 
 function Navbar() {
