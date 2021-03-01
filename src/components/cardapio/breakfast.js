@@ -132,7 +132,7 @@ const Breakfast = () => {
           itemPedido.map((product) => (
             {
               'id': Number(product.id),
-              'qtd': 1
+              'qtd': Number(product.qtd)
             }
           ))
       })
@@ -188,7 +188,7 @@ const Breakfast = () => {
         {
           menuCafe.map((product, index) => {
             return (
-              <div className='card-product' 
+              <div className='card-product' disabled={product.qtd && product.qtd != 0}
                 key={product.id} 
                 id={product.id} 
                 name={product.name} 
