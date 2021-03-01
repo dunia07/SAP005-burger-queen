@@ -23,6 +23,7 @@ const Breakfast = () => {
   // console.log(userCliente.client, userMesa.table, order)
 
   console.log(itemPedido)
+  console.log(client)
 
   localStorage.setItem('userCliente', client)
   localStorage.setItem('userMesa', table)
@@ -34,8 +35,10 @@ const Breakfast = () => {
     const idProduct = product.getAttribute('id')
     const nameProduct = product.getAttribute('name')
     const priceProduct = product.getAttribute('price')
-
+   
     const pedido = {
+      client: client,
+      table: table, 
       id: idProduct,
       name: nameProduct,
       price: priceProduct,
@@ -43,8 +46,8 @@ const Breakfast = () => {
     }
 
     addPedido(pedido)
-
-    somaValor()
+      
+    setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
 
     
     
@@ -81,32 +84,6 @@ const Breakfast = () => {
     setItemPedido(newArray)
   }
 
-  const somaValor = () => {   
-    itemPedido.forEach(product => {
-      const valorInicial = Number(product.price)
-      setItemValor(valorInicial + itemValor)
-    }) 
-  }
-
-  const subtraiValor = () => {   
-    itemPedido.forEach(product => {
-      const valorInicial = Number(product.price)
-      setItemValor(valorInicial - itemValor)
-    }) 
-  }
-
-  // function Counter ({initialCount}) {   
-  //   const [count, setCount] = useState(initialCount)
-  //   return (
-  //     <>
-  //       Count: {count}
-  //       <button onClick={() => setCount(initialCount)}>Reset</button>
-  //       <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
-  //       <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
-  //     </>
-  //   )  
-  // }
-
   // const HandleOrder = (e) => {
   //   setOrder({ ...order, client: e.target.value, table: e.target.value, products: itemPedido })
   // };
@@ -138,13 +115,14 @@ const Breakfast = () => {
   }, [getProducts])
 
 
-  const HandleSubmit = () => {
+  const sendOrder = () => {
+    
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'POST',
       headers: {
         'accept': 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `${token}`,
+        'Authorization': `${token}`,
       },
 
       body: JSON.stringify({
@@ -165,8 +143,14 @@ const Breakfast = () => {
         alert('Pedido Criado com Sucesso!');
       })
     )
-      
+
+       
   };
+  // [token])
+
+  // useEffect(() => {
+  //   sendOrder()
+  // }, [sendOrder])
 
   return (
     <div className='product'>
@@ -222,14 +206,13 @@ const Breakfast = () => {
       </div>
 
       <div className='show-resume'>  
-      
-        <p>RESUMO DO PEDIDO</p>
-        <p>Atendente: {nameAtendente}</p>
-        <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p>      
 
         {itemPedido !== [] && 
           <div>
             <section className='titulo-lista-pedido'>
+              <p>RESUMO DO PEDIDO</p>
+              <p>Atendente: {nameAtendente}</p>
+              <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p> 
               <label>Item: </label>
               <label>R$ </label> 
             </section>
@@ -240,12 +223,6 @@ const Breakfast = () => {
                       <label key={index}> {product.name} R$ {product.price},00 
                       {/* {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price*product.qtd)} */}
                       </label>
-                      <>
-                        {/* Count: {count} */}
-                        {/* <button onClick={() => setItemValor(itemValor)}>Reset</button> */}
-                        {/* <button onClick={() => setItemValor(prevCount => prevCount - 1)}>-</button>
-                        <button onClick={() => setItemValor(prevCount => prevCount + 1)}>+</button> */}
-                      </>
                       <input
                         className='input-quantidade'
                         id='aumentar-qtd'
@@ -255,7 +232,8 @@ const Breakfast = () => {
                           if(product.name === itemPedido[index].name) {
                             itemPedido[index].qtd++; 
                             setItemPedido([...itemPedido]);
-                            somaValor()
+                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+                            
                           }
                         }}
                       />
@@ -271,10 +249,12 @@ const Breakfast = () => {
                           if(product.qtd > 1 && product.name === itemPedido[index].name) {
                             itemPedido[index].qtd--; 
                             setItemPedido([...itemPedido]);
-                            subtraiValor()
+                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+                           
                           } else if(product.name === itemPedido[index].name && product.qtd === 1) {
                             itemPedido.splice(index, 1);
                             setItemPedido([...itemPedido]);
+                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
                           }  
                         }}
                       />
@@ -288,6 +268,7 @@ const Breakfast = () => {
                         onClick={() => {
                           itemPedido.splice(index, 1);
                           setItemPedido([...itemPedido]);
+                          setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
                         }}
                       />                
                           
@@ -304,13 +285,11 @@ const Breakfast = () => {
       
           <p> Total Pedido: R$ {itemValor}</p>
 
-          {/* <button className='bnt' onClick={() => HandleSubmit()}>FINALIZAR</button>  */}
-
           <Button 
             className='button'
             name='Finalizar Pedido'
             type='submit'
-            onClick= {() => {HandleSubmit()}}
+            onClick= {() => {sendOrder()}}
           />     
         </div>
 

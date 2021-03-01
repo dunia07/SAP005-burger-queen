@@ -1,6 +1,33 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const PendingOrders = () => {
+const pendingOrders = () => {
+  // const token = localStorage.getItem('userToken') 
+  // const [order, setOrder] = useState('')
+
+  //  const getOrders = useCallback (() => {
+  //   fetch('https://lab-api-bq.herokuapp.com/orders', {
+  //     method: 'GET',
+  //     headers: {
+  //       'accept': 'application/json',
+  //       'Authorization': `${token}`,
+  //     },
+  //   })       
+    
+  //   .then((response) => response.json())
+  //     .then((json) => {
+  //       console.log(json);
+  //       setOrder()
+        
+  //     });
+    
+  // }, [token])
+
+  // useEffect(() => {
+  //   getOrtders()
+  // }, [getOrders])
+
+
   return (
     <div className='pendingOrders'>
       <p>
@@ -13,4 +40,4 @@ const PendingOrders = () => {
   )
 }
 
-export default PendingOrders;
+export default pendingOrders;
