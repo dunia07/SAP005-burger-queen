@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../button';
 import Input from '../input';
 import Lixeira from '../../image/lixeira.png';
+// import Navbar from '../../components/navbar/hallNavbar'
 
 const Breakfast = () => {
   const [menuCafe, setMenuCafe] = useState([]);
@@ -13,11 +14,6 @@ const Breakfast = () => {
   const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
-  
-  // console.log(userCliente.client, userMesa.table, order)
-
-  console.log(itemPedido)
-  console.log(client)
 
   localStorage.setItem('userCliente', client)
   localStorage.setItem('userMesa', table)
@@ -46,7 +42,7 @@ const Breakfast = () => {
   const HandleClienteMesa = () => {
     setMesaPedido([{client, table}]);
     limparInput()
-    console.log(mesaPedido)
+    // console.log(mesaPedido)
   }
    
   const limparInput = () => {
@@ -115,7 +111,8 @@ const Breakfast = () => {
   
   return (
     <div className='product'>
-
+      {/* <Navbar /> */}
+    
       <div className='show-input'>
         
         <section>
@@ -147,9 +144,9 @@ const Breakfast = () => {
 
       <div className='show-product'>      
         {
-          menuCafe.map((product, index) => {
+          menuCafe.map((product) => {
             return (
-              <div className='card-product' disabled={product.qtd && product.qtd != 0}
+              <div className='card-product' disabled={product.qtd && product.qtd !== 0}
                 key={product.id} 
                 id={product.id} 
                 name={product.name} 
