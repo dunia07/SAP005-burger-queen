@@ -41,25 +41,25 @@ const PendingOrders = () => {
         'Authorization': `${token}`
       },
       body: JSON.stringify({
-          'status': 'finished'
+          'status': 'Pedido pronto'
       })
     })
     .then((response) => response.json())
     .then((json) => {
       console.log(json)
-      setOrderStatus({...orderStatus, status: 'finished'})
+      setOrderStatus({...orderStatus, status: 'Pedido pronto'})
     })
   }
 
   return (
     <div className='pending'>
-   
+     
       <div className='show-product'>  
 
         {order && order.map (function (product, index) {
           return(
             <div  key={index}>
-             
+            
               <span><p>Atendente: {product.user_id}</p></span>
               <span>
                 <div>
@@ -89,15 +89,15 @@ const PendingOrders = () => {
               </span>
             </div>
           )
-        })
-      }
+        })}
 
       </div>
-        <p>
-          <Link to='/finalized-orders'>
-            <span id='button' className='textRegister'>Pedidos Finalizados</span>
-          </Link>  
-        </p>
+
+      <p>
+        <Link to='/finalized-orders'>
+          <span id='button' className='textRegister'>Pedidos Finalizados</span>
+        </Link>  
+      </p>
       <Link to='/'><button type='submit' className='buttonLogout' id='btn-logOut'>Sair</button></Link>
 
     </div>
