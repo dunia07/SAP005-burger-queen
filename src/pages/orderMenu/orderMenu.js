@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import Header from '../../components/header/innerHeader';
 import Breakfast from '../../components/cardapio/breakfast';
 import Allday from '../../components/cardapio/allday';
-import Navbar from '../../components/navbar/hallNavbar';
+
+import Header from '../../components/header/innerHeader';
+import Navbar from '../../components/navbar/navbar';
+import Footer from '../../components/footer'
 
 const OrderMenu = () => {
   
@@ -14,16 +16,14 @@ const OrderMenu = () => {
    
   return (
     <div className='order'>
+      <Header />
+      <Navbar />
       <div className='order-menu'>
-        <Header />
-        <Navbar />
-        
         <select className='yellow-text' id='menu' value={menuSelect} onChange= {HandleMenuSelect}>
           <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
           <option value='Resto do dia'>Almoço/Jantar</option>
           <option value='Café da Manhã'>Café da Manhã</option>
         </select>   
-        
         <>
           {
             (menuSelect === 'Selecione o Menu') ?
@@ -35,9 +35,8 @@ const OrderMenu = () => {
             <Breakfast />
           }
         </>
-
       </div>
-
+      <Footer />
     </div>  
   )
 }

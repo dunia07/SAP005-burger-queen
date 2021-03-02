@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/button';
 
 import Header from '../../components/header/innerHeader';
+import Navbar from '../../components/navbar/navbar';
+import Footer from '../../components/footer'
 
 
 const FinalizedOrders = () => {
@@ -55,9 +57,9 @@ const FinalizedOrders = () => {
   }
 
   return (
-    <div className='finalizedOrders'>
-      <Header />  
-
+    <div className='finalized-orders'>
+      <Header />
+      <Navbar />
       <div className='show-product'>  
 
         {order && order.map (function (product, index) {
@@ -96,18 +98,7 @@ const FinalizedOrders = () => {
         })}
 
       </div>
-
-      <p>
-        <Link to='/order-menu'>
-          <span id='button' className='textRegister'>Menu Pedidos</span>
-        </Link>  
-      </p>
-      <p>
-        <Link to='/ready-orders'>
-          <span id='button' className='textRegister'>Pedidos Prontos</span>
-        </Link>  
-      </p>
-      <Link to='/'><button type='submit' className='buttonLogout' id='btn-logOut'>Sair</button></Link>
+      <Footer />
     </div>
   )
 }

@@ -2,6 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button';
 
+import Header from '../../components/header/innerHeader';
+import Navbar from '../../components/navbar/navbar';
+import Footer from '../../components/footer'
+
 const PendingOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
@@ -53,7 +57,8 @@ const PendingOrders = () => {
 
   return (
     <div className='pending'>
-     
+      <Header />
+      <Navbar />
       <div className='show-product'>  
 
         {order && order.map (function (product, index) {
@@ -90,16 +95,8 @@ const PendingOrders = () => {
             </div>
           )
         })}
-
       </div>
-
-      <p>
-        <Link to='/finalized-orders'>
-          <span id='button' className='textRegister'>Pedidos Finalizados</span>
-        </Link>  
-      </p>
-      <Link to='/'><button type='submit' className='buttonLogout' id='btn-logOut'>Sair</button></Link>
-
+      <Footer />
     </div>
   )
 }
