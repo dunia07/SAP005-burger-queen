@@ -13,13 +13,7 @@ const Breakfast = () => {
   const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
-
-  //const [count, setCount] = useState(itemValor)
-  //const [itemQuant, setItemQuant] = useState([]);
   
-  //const [order, setOrder] = useState([])
-  //const [order, setOrder] = useState({});
- 
   // console.log(userCliente.client, userMesa.table, order)
 
   console.log(itemPedido)
@@ -27,7 +21,6 @@ const Breakfast = () => {
 
   localStorage.setItem('userCliente', client)
   localStorage.setItem('userMesa', table)
-
 
   const HandleAddPedido = (e) => {
     e.preventDefault()
@@ -48,23 +41,6 @@ const Breakfast = () => {
     addPedido(pedido)
       
     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-
-    
-    
-    //let resumePedido =[] 
-
-    // console.log(pedido)
-
-    // setItemPedido([...itemPedido, pedido])
-    // setItemQuant([...itemQuant, pedido])
-    // HandleSomaValor() 
-
-    // if (localStorage.hasOwnProperty('resumePedido')) {
-    //   resumePedido = JSON.parse(localStorage.getItem('resumePedido'))
-    // }
-    // resumePedido.push({pedido})
-    // localStorage.setItem('resumePedido', JSON.stringify(resumePedido))
-
   }
 
   const HandleClienteMesa = () => {
@@ -84,12 +60,6 @@ const Breakfast = () => {
     setItemPedido(newArray)
   }
 
-  // const HandleOrder = (e) => {
-  //   setOrder({ ...order, client: e.target.value, table: e.target.value, products: itemPedido })
-  // };
-
-
-
   const getProducts = useCallback (() => {
             
     fetch('https://lab-api-bq.herokuapp.com/products/', {
@@ -98,7 +68,6 @@ const Breakfast = () => {
         'accept': 'application/json',
         'Authorization': `${token}`
       },
-
     })
     .then((response) => response.json())
       .then((json) => {
@@ -113,7 +82,6 @@ const Breakfast = () => {
   useEffect(() => {
     getProducts()
   }, [getProducts])
-
 
   const sendOrder = () => {
     
@@ -142,16 +110,9 @@ const Breakfast = () => {
         console.log(json);
         alert('Pedido Criado com Sucesso!');
       })
-    )
-
-       
+    )   
   };
-  // [token])
-
-  // useEffect(() => {
-  //   sendOrder()
-  // }, [sendOrder])
-
+  
   return (
     <div className='product'>
 
@@ -197,11 +158,9 @@ const Breakfast = () => {
                
                 <p className='white-text'>{product.name}</p> 
                 <p className='white-text'>R$ {product.price},00</p> 
-           
               </div>
             )
           })
-          
         } 
       </div>
 
@@ -233,7 +192,6 @@ const Breakfast = () => {
                             itemPedido[index].qtd++; 
                             setItemPedido([...itemPedido]);
                             setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-                            
                           }
                         }}
                       />
@@ -271,7 +229,6 @@ const Breakfast = () => {
                           setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
                         }}
                       />                
-                          
                     </li>
                   </>
                   )
@@ -294,10 +251,8 @@ const Breakfast = () => {
         </div>
 
       </div>     
-       
     </div>
   )
-  
 }
 
 export default Breakfast;
