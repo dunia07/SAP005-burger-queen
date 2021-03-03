@@ -107,7 +107,8 @@ const Allday = () => {
         console.log(json);
         alert('Pedido Criado com Sucesso!');
       })
-    )   
+    )
+      
   };
 
   return (
@@ -247,7 +248,8 @@ const Allday = () => {
             name='Finalizar Pedido'
             type='submit'
             onClick= {() => {sendOrder()}}
-          />     
+          /> 
+              
         </div>
 
       </div>   

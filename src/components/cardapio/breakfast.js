@@ -12,6 +12,7 @@ const Breakfast = () => {
   const [client, setClient] = useState(''); 
   const [table, setTable] = useState(''); 
   const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
+  // const [mesaPedido, setMesaPedido] = useState([{client, table}])
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
 
@@ -44,6 +45,20 @@ const Breakfast = () => {
     limparInput()
     // console.log(mesaPedido)
   }
+
+  // const HandleClienteMesa = (e) => {
+  //   setClient(e.target.value);
+  //   setTable(e.target.value);
+  //   limparInput()
+  //   // console.log(mesaPedido)
+  // }
+
+  // função update
+  // handleClick = () => {
+  //   this.setState(prevState => ({ // poderia ser qualquer nome, não só prevState
+  //     contador: prevState.contador + 1
+  //   }));
+  // };
    
   const limparInput = () => {
     const inputs = document.querySelectorAll('input');
@@ -104,9 +119,15 @@ const Breakfast = () => {
     .then((response) => response.json()
       .then((json) => {
         console.log(json);
+        setItemPedido([]);
+        setItemValor([]);
+        setMesaPedido([{client:'', table:''}])
+        // setClient([]);
+        // setTable([])
         alert('Pedido Criado com Sucesso!');
       })
     )   
+    
   };
   
   return (
@@ -146,12 +167,12 @@ const Breakfast = () => {
         {
           menuCafe.map((product) => {
             return (
-              <div className='card-product' disabled={product.qtd && product.qtd !== 0}
+              <div className='card-product'
                 key={product.id} 
                 id={product.id} 
                 name={product.name} 
                 price={product.price}
-                onClick ={HandleAddPedido}>            
+                onClick ={HandleAddPedido} >            
                
                 <p className='white-text'>{product.name}</p> 
                 <p className='white-text'>R$ {product.price},00</p> 
@@ -168,6 +189,8 @@ const Breakfast = () => {
             <section className='titulo-lista-pedido'>
               <p>RESUMO DO PEDIDO</p>
               <p>Atendente: {nameAtendente}</p>
+              {/* <p>Cliente: {client} Mesa: {table}</p>  */}
+              {/* <p>Cliente: {mesaPedido.client} Mesa: {mesaPedido.table}</p>  */}
               <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p> 
               <label>Item: </label>
               <label>R$ </label> 
@@ -178,23 +201,7 @@ const Breakfast = () => {
                     <li>
                       <label key={index}> {product.name} R$ {product.price},00 
                       {/* {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price*product.qtd)} */}
-                      </label>
-                      <input
-                        className='input-quantidade'
-                        id='aumentar-qtd'
-                        type='button'
-                        value='+'
-                        onClick={() => {
-                          if(product.name === itemPedido[index].name) {
-                            itemPedido[index].qtd++; 
-                            setItemPedido([...itemPedido]);
-                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-                          }
-                        }}
-                      />
-
-                      <button>{product.qtd}</button>
-
+                      </label>                      
                       <input 
                         className='input-quantidade'
                         name='diminuir'
@@ -211,6 +218,22 @@ const Breakfast = () => {
                             setItemPedido([...itemPedido]);
                             setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
                           }  
+                        }}
+                      />
+
+                      <button>{product.qtd}</button>
+
+                      <input
+                        className='input-quantidade'
+                        id='aumentar-qtd'
+                        type='button'
+                        value='+'
+                        onClick={() => {
+                          if(product.name === itemPedido[index].name) {
+                            itemPedido[index].qtd++; 
+                            setItemPedido([...itemPedido]);
+                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+                          }
                         }}
                       />
 
@@ -244,7 +267,8 @@ const Breakfast = () => {
             name='Finalizar Pedido'
             type='submit'
             onClick= {() => {sendOrder()}}
-          />     
+          />  
+             
         </div>
 
       </div>     

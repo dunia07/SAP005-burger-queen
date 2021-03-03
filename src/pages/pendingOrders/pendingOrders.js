@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import Button from '../../components/button';
 
 import Header from '../../components/header/innerHeader';
@@ -9,7 +8,14 @@ import Footer from '../../components/footer'
 const PendingOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
-  const [orderStatus, setOrderStatus] = useState([{status: 'pending'}]);
+  const [orderStatus, setOrderStatus] = useState([]);
+
+ // const [orderAtual, setOrderAtual] = useContext([order]);
+  
+  // const handleRefresh = () => {
+  //   const atualizar = useContext(order)[0]
+  //   setOrder([atualizar]);
+  // };
 
   const getOrders = useCallback (() => {
     
@@ -52,8 +58,25 @@ const PendingOrders = () => {
     .then((json) => {
       console.log(json)
       setOrderStatus({...orderStatus, status: 'Pedido pronto'})
+      // window.location.reload()
+      getOrders()
     })
+
   }
+
+  
+
+  // componentDidUpdate(prevProps, prevState){
+  //   if (prevState.orders !== this.state.orders) {
+  //     document.title = `Você clicou ${this.state.orders} vezes`;
+  //   }
+  // }
+
+
+  // useEffect(() => {
+    
+  // }, [orders])
+
 
   return (
     <div className='pending'>
