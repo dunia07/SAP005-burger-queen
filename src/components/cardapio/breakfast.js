@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../button';
 import Input from '../input';
 import Lixeira from '../../image/lixeira.png';
-// import Navbar from '../../components/navbar/hallNavbar'
 
 const Breakfast = () => {
   const [menuCafe, setMenuCafe] = useState([]);
@@ -11,8 +10,6 @@ const Breakfast = () => {
 
   const [client, setClient] = useState(''); 
   const [table, setTable] = useState(''); 
-  const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
-  // const [mesaPedido, setMesaPedido] = useState([{client, table}])
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
 
@@ -40,26 +37,6 @@ const Breakfast = () => {
     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
   }
 
-  const HandleClienteMesa = () => {
-    setMesaPedido([{client, table}]);
-    limparInput()
-    // console.log(mesaPedido)
-  }
-
-  // const HandleClienteMesa = (e) => {
-  //   setClient(e.target.value);
-  //   setTable(e.target.value);
-  //   limparInput()
-  //   // console.log(mesaPedido)
-  // }
-
-  // função update
-  // handleClick = () => {
-  //   this.setState(prevState => ({ // poderia ser qualquer nome, não só prevState
-  //     contador: prevState.contador + 1
-  //   }));
-  // };
-   
   const limparInput = () => {
     const inputs = document.querySelectorAll('input');
     [].map.call(inputs, (entrada) => (entrada.value = ''));
@@ -70,6 +47,42 @@ const Breakfast = () => {
     newArray.push(product)
     setItemPedido(newArray)
   }
+
+  // const addQtd = (index) => {
+  //   let newArrayProduto = [...itemPedido];
+  //   newArrayProduto[index].qtd++;
+  //   // newArrayProduto[index].price =
+  //   //   newArrayProduto[index].initialPrice * newArrayProduto[index].qtd;
+  //   setItemPedido(newArrayProduto);
+  //   // setItemPedido([...itemPedido]);
+  //   // setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+    
+  // }
+
+  // const addQtd = (itemPedido, index) => {
+  //   // itemPedido.map((product, index) => {
+  //     const productName = itemPedido.name
+  //     const productItem = itemPedido[index].name
+  //     if(productName === productItem) {
+  //       itemPedido[index].qtd++; 
+  //       setItemPedido([...itemPedido]);
+  //       setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+  //     }
+  //   // })
+  // }
+
+  // const removeQtd = () => {
+  //   if(product.qtd > 1 && product.name === itemPedido[index].name) {
+  //     itemPedido[index].qtd--; 
+  //     setItemPedido([...itemPedido]);
+  //     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+      
+  //   } else if(product.name === itemPedido[index].name && product.qtd === 1) {
+  //     itemPedido.splice(index, 1);
+  //     setItemPedido([...itemPedido]);
+  //     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+  //   }  
+  // }
 
   const getProducts = useCallback (() => {
             
@@ -121,19 +134,17 @@ const Breakfast = () => {
         console.log(json);
         setItemPedido([]);
         setItemValor([]);
-        setMesaPedido([{client:'', table:''}])
-        // setClient([]);
-        // setTable([])
+        setClient([]);
+        setTable([]);
+        limparInput();
         alert('Pedido Criado com Sucesso!');
       })
     )   
-    
   };
   
   return (
     <div className='product'>
-      {/* <Navbar /> */}
-    
+         
       <div className='show-input'>
         
         <section>
@@ -152,14 +163,7 @@ const Breakfast = () => {
             type='text'
             placeholder='Número da Mesa'
             onChange={(e) => setTable (e.target.value)}
-          />
-
-          <Button 
-          className='add'
-          name='+'
-          type='submit'
-          onClick= {(event) => HandleClienteMesa(event)}
-          />
+          />         
         </section>
       </div>
 
@@ -167,16 +171,17 @@ const Breakfast = () => {
         {
           menuCafe.map((product) => {
             return (
-              <div className='card-product'
+              <button className='card-product' 
                 key={product.id} 
                 id={product.id} 
                 name={product.name} 
                 price={product.price}
+                // disabled={product.qtd && product.qtd !== 0}
                 onClick ={HandleAddPedido} >            
                
                 <p className='white-text'>{product.name}</p> 
                 <p className='white-text'>R$ {product.price},00</p> 
-              </div>
+              </button>
             )
           })
         } 
@@ -189,9 +194,7 @@ const Breakfast = () => {
             <section className='titulo-lista-pedido'>
               <p>RESUMO DO PEDIDO</p>
               <p>Atendente: {nameAtendente}</p>
-              {/* <p>Cliente: {client} Mesa: {table}</p>  */}
-              {/* <p>Cliente: {mesaPedido.client} Mesa: {mesaPedido.table}</p>  */}
-              <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p> 
+              <p>Cliente: {client} Mesa: {table}</p> 
               <label>Item: </label>
               <label>R$ </label> 
             </section>
@@ -199,9 +202,7 @@ const Breakfast = () => {
               {itemPedido.map((product, index) => (
                   <>
                     <li>
-                      <label key={index}> {product.name} R$ {product.price},00 
-                      {/* {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price*product.qtd)} */}
-                      </label>                      
+                      <label key={index}> {product.name} R$ {product.price},00 </label>                      
                       <input 
                         className='input-quantidade'
                         name='diminuir'
@@ -220,6 +221,7 @@ const Breakfast = () => {
                           }  
                         }}
                       />
+                      
 
                       <button>{product.qtd}</button>
 
@@ -228,6 +230,7 @@ const Breakfast = () => {
                         id='aumentar-qtd'
                         type='button'
                         value='+'
+                        // onClick={addQtd}
                         onClick={() => {
                           if(product.name === itemPedido[index].name) {
                             itemPedido[index].qtd++; 
