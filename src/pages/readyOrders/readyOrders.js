@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '../../components/button';
 
 import Header from '../../components/header/innerHeader'
+import Navbar from '../../components/navbar/navbar';
+import Footer from '../../components/footer'
 
 
 const ReadyOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
-  const [orderStatus, setOrderStatus] = useState([{status: 'Pedido pronto'}]);
+  const [orderStatus, setOrderStatus] = useState([]);
 
   const getOrders = useCallback (() => {
     
@@ -51,13 +52,14 @@ const ReadyOrders = () => {
     .then((json) => {
       console.log(json)
       setOrderStatus({...orderStatus, status: 'Pedido entregue'})
+      getOrders()
     })
   }
   
   return (
     <div className='readyOrders'>
       <Header />
-      
+      <Navbar />
       <div className='show-product'>  
 
         {order && order.map (function (product, index) {
@@ -96,19 +98,7 @@ const ReadyOrders = () => {
         })}
 
       </div>
-
-      <p>
-        <Link to='/order-menu'>
-          <span id='button' className='textRegister'>Menu Pedidos</span>
-        </Link>  
-      </p>
-      <p>
-        <Link to='/finalized-orders'>
-          <span id='button' className='textRegister'>Pedidos Finalizados</span>
-        </Link>  
-      </p>
-      <Link to='/'><button type='submit' className='buttonLogout' id='btn-logOut'>Sair</button></Link>
-
+      <Footer />
     </div>
   )
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../button';
 import Input from '../input';
 import Lixeira from '../../image/lixeira.png';
-// import Navbar from '../../components/navbar/kitchenNavbar'
 
 const Allday = () => {
   const [menuAlmocoJanta, setMenuAlmocoJanta] = useState([]);
@@ -11,7 +10,6 @@ const Allday = () => {
   
   const [client, setClient] = useState(''); 
   const [table, setTable] = useState(''); 
-  const [mesaPedido, setMesaPedido] = useState([{client:'', table:''}])
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
   
@@ -37,12 +35,6 @@ const Allday = () => {
     addPedido(pedido)
       
     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-  }
-
-  const HandleClienteMesa = () => {
-    setMesaPedido([{client, table}]);
-    limparInput()
-    // console.log(mesaPedido)
   }
    
   const limparInput = () => {
@@ -105,15 +97,20 @@ const Allday = () => {
     .then((response) => response.json()
       .then((json) => {
         console.log(json);
+        setItemPedido([]);
+        setItemValor([]);
+        setClient([]);
+        setTable([])
+        limparInput()
         alert('Pedido Criado com Sucesso!');
+        
       })
-    )   
+    )
   };
 
   return (
     <div className='product'>
-      {/* <Navbar /> */}
-    
+          
       <div className='show-input'>
         
         <section>
@@ -132,14 +129,7 @@ const Allday = () => {
             type='text'
             placeholder='Número da Mesa'
             onChange={(e) => setTable (e.target.value)}
-          />
-
-          <Button 
-          className='add'
-          name='+'
-          type='submit'
-          onClick= {(event) => HandleClienteMesa(event)}
-          />
+          />      
         </section>
       </div>
 
@@ -147,18 +137,19 @@ const Allday = () => {
         {
           menuAlmocoJanta.map((product)=> {
             return (
-              <div className='card-product' disabled={product.qtd && product.qtd !== 0}
+              <button className='card-product' 
                 key={product.id} 
                 id={product.id} 
                 name={product.name} 
                 price={product.price}
+                // disabled={product.qtd && product.qtd !== 0
                 onClick ={HandleAddPedido}> 
 
                 <p className='white-text'>{product.name}</p> 
                 <p className='white-text'>{product.flavor}</p>
                 <p className='white-text'> {product.complement}</p>
                 <p className='white-text'>R$ {product.price},00</p> 
-              </div>
+              </button>
             )
           })
         }   
@@ -171,7 +162,7 @@ const Allday = () => {
             <section className='titulo-lista-pedido'>
               <p>RESUMO DO PEDIDO</p>
               <p>Atendente: {nameAtendente}</p>
-              <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p> 
+              <p>Cliente: {client} Mesa: {table}</p>
               <label>Item: </label>
               <label>R$ </label> 
             </section>
@@ -179,9 +170,7 @@ const Allday = () => {
               {itemPedido.map((product, index) => (
                   <>
                     <li>
-                      <label key={index}> {product.name} R$ {product.price},00 
-                      {/* {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price*product.qtd)} */}
-                      </label>
+                      <label key={index}> {product.name} R$ {product.price},00 </label>
                       <input
                         className='input-quantidade'
                         id='aumentar-qtd'
@@ -240,14 +229,15 @@ const Allday = () => {
 
         <div className='show-total'>
       
-          <p> Total Pedido: R$ {itemValor}</p>
+          <p> Total Pedido: R$ {itemValor},00</p>
 
           <Button 
             className='button'
             name='Finalizar Pedido'
             type='submit'
             onClick= {() => {sendOrder()}}
-          />     
+          /> 
+              
         </div>
 
       </div>   

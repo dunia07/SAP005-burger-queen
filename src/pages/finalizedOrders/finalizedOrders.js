@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../../components/button';
 
 import Header from '../../components/header/innerHeader';
 import Navbar from '../../components/navbar/navbar';
@@ -10,7 +8,7 @@ import Footer from '../../components/footer'
 const FinalizedOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
-  const [orderStatus, setOrderStatus] = useState([{status: 'Pedido entregue'}]);
+  const [orderStatus, setOrderStatus] = useState([]);
 
   const getOrders = useCallback (() => {
     
@@ -36,26 +34,28 @@ const FinalizedOrders = () => {
     getOrders()
   }, [getOrders])
 
-  const finalized = (productId) => {
+  
     
+  useEffect((productId) => {
     fetch(`https://lab-api-bq.herokuapp.com/orders/${productId}`, {
-      method: 'PUT',
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`
-      },
-      body: JSON.stringify({
-          'status': 'Pedido finalizado'
-      })
+    method: 'PUT',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    },
+    body: JSON.stringify({
+        'status': 'Pedido finalizado'
     })
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json)
-      setOrderStatus({...orderStatus, status: 'Pedido finalizado'})
-    })
-  }
-
+  })
+  .then((response) => response.json())
+  .then((json) => {
+    console.log(json)
+    setOrderStatus({...orderStatus, status: 'Pedido finalizado'})
+    getOrders()
+  })
+  })
+  
   return (
     <div className='finalized-orders'>
       <Header />
@@ -85,12 +85,7 @@ const FinalizedOrders = () => {
                       <p>Item {item.name} </p>                  
                     </div>                    
                   )})}
-                  <Button 
-                    className='button'
-                    name='Entregar pedido'
-                    type='submit'
-                    onClick= {() => {finalized(product.id)}}
-                  />
+                  
                 </p>
               </span>
             </div>
