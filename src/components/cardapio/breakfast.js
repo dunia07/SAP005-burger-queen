@@ -4,22 +4,18 @@ import Input from '../input';
 import Lixeira from '../../image/lixeira.png';
 
 const Breakfast = () => {
-  const [menuCafe, setMenuCafe] = useState([]);
   const token = localStorage.getItem('userToken') 
   const nameAtendente = localStorage.getItem('userName')
-
+  const [menuCafe, setMenuCafe] = useState([]);
   const [client, setClient] = useState(''); 
   const [table, setTable] = useState(''); 
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
 
-  localStorage.setItem('userCliente', client)
-  localStorage.setItem('userMesa', table)
-
   const HandleAddPedido = (e) => {
     e.preventDefault()
     const product = e.target.parentNode;
-    const idProduct = product.getAttribute('id')
+    const idProduct = Number(product.getAttribute('id'))
     const nameProduct = product.getAttribute('name')
     const priceProduct = product.getAttribute('price')
    
@@ -35,6 +31,10 @@ const Breakfast = () => {
     addPedido(pedido)
       
     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+
+    setMenuCafe(prevMenuCafe => {
+      return prevMenuCafe.map(prevItem => prevItem.id === idProduct ? {...prevItem, disabled: true } : prevItem)
+    })
   }
 
   const limparInput = () => {
@@ -48,41 +48,37 @@ const Breakfast = () => {
     setItemPedido(newArray)
   }
 
-  // const addQtd = (index) => {
-  //   let newArrayProduto = [...itemPedido];
-  //   newArrayProduto[index].qtd++;
-  //   // newArrayProduto[index].price =
-  //   //   newArrayProduto[index].initialPrice * newArrayProduto[index].qtd;
-  //   setItemPedido(newArrayProduto);
-  //   // setItemPedido([...itemPedido]);
-  //   // setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-    
-  // }
+  const addQtd = (product, index) => {
+    if(product.name === itemPedido[index].name) {
+      itemPedido[index].qtd++; 
+      setItemPedido([...itemPedido]);
+      setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+    }
+  }
 
-  // const addQtd = (itemPedido, index) => {
-  //   // itemPedido.map((product, index) => {
-  //     const productName = itemPedido.name
-  //     const productItem = itemPedido[index].name
-  //     if(productName === productItem) {
-  //       itemPedido[index].qtd++; 
-  //       setItemPedido([...itemPedido]);
-  //       setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-  //     }
-  //   // })
-  // }
+  const subtraiQtd = (product, index) => {
+    if(product.qtd > 1 && product.name === itemPedido[index].name) {      
+      itemPedido[index].qtd--; 
+      setItemPedido([...itemPedido]);
+      setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+    } else if(product.name === itemPedido[index].name && product.qtd === 1) {
+      setMenuCafe(prevMenuCafe => {
+        return prevMenuCafe.map(prevItem=> prevItem.id === product.id ? {...prevItem, disabled: false } : prevItem)
+      })
+      itemPedido.splice(index, 1);
+      setItemPedido([...itemPedido]);
+      setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+    }  
+  }
 
-  // const removeQtd = () => {
-  //   if(product.qtd > 1 && product.name === itemPedido[index].name) {
-  //     itemPedido[index].qtd--; 
-  //     setItemPedido([...itemPedido]);
-  //     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-      
-  //   } else if(product.name === itemPedido[index].name && product.qtd === 1) {
-  //     itemPedido.splice(index, 1);
-  //     setItemPedido([...itemPedido]);
-  //     setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-  //   }  
-  // }
+  const deleteQtd = (product, index) => {
+    setMenuCafe(prevMenuCafe => {
+      return prevMenuCafe.map(prevItem=> prevItem.id === product.id ? {...prevItem, disabled: false } : prevItem)
+    })
+    itemPedido.splice(index, 1);
+    setItemPedido([...itemPedido]);
+    setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
+  }
 
   const getProducts = useCallback (() => {
             
@@ -97,10 +93,9 @@ const Breakfast = () => {
       .then((json) => {
         console.log(json);
         const getBreakfast = json.filter(item => item.type === 'breakfast')
-        setMenuCafe(getBreakfast)
-        
-      });
-    
+        const itemProduct = json.map(item =>  ({...item, disabled: false}));
+        setMenuCafe(getBreakfast, itemProduct)
+      })
   }, [token])
 
   useEffect(() => {
@@ -144,9 +139,8 @@ const Breakfast = () => {
   
   return (
     <div className='product'>
-         
+
       <div className='show-input'>
-        
         <section>
           <Input
             required
@@ -176,9 +170,8 @@ const Breakfast = () => {
                 id={product.id} 
                 name={product.name} 
                 price={product.price}
-                // disabled={product.qtd && product.qtd !== 0}
+                disabled={product.disabled}
                 onClick ={HandleAddPedido} >            
-               
                 <p className='white-text'>{product.name}</p> 
                 <p className='white-text'>R$ {product.price},00</p> 
               </button>
@@ -188,7 +181,6 @@ const Breakfast = () => {
       </div>
 
       <div className='show-resume'>  
-
         {itemPedido !== [] && 
           <div>
             <section className='titulo-lista-pedido'>
@@ -208,21 +200,9 @@ const Breakfast = () => {
                         name='diminuir'
                         type='button'
                         value='-'
-                        onClick = {()=> {
-                          if(product.qtd > 1 && product.name === itemPedido[index].name) {
-                            itemPedido[index].qtd--; 
-                            setItemPedido([...itemPedido]);
-                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-                           
-                          } else if(product.name === itemPedido[index].name && product.qtd === 1) {
-                            itemPedido.splice(index, 1);
-                            setItemPedido([...itemPedido]);
-                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-                          }  
-                        }}
+                        onClick = {()=> {subtraiQtd(product, index)}}
                       />
-                      
-
+                    
                       <button>{product.qtd}</button>
 
                       <input
@@ -230,14 +210,7 @@ const Breakfast = () => {
                         id='aumentar-qtd'
                         type='button'
                         value='+'
-                        // onClick={addQtd}
-                        onClick={() => {
-                          if(product.name === itemPedido[index].name) {
-                            itemPedido[index].qtd++; 
-                            setItemPedido([...itemPedido]);
-                            setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-                          }
-                        }}
+                        onClick={() => {addQtd(product, index)}}
                       />
 
                       <input
@@ -246,11 +219,7 @@ const Breakfast = () => {
                         type='image'
                         src={Lixeira}
                         alt='lixeira'
-                        onClick={() => {
-                          itemPedido.splice(index, 1);
-                          setItemPedido([...itemPedido]);
-                          setItemValor(itemPedido.reduce((acumulado, product) => acumulado + (product.qtd*Number(product.price)), 0))
-                        }}
+                        onClick={() => {deleteQtd(product, index)}}
                       />                
                     </li>
                   </>
@@ -273,7 +242,6 @@ const Breakfast = () => {
           />  
              
         </div>
-
       </div>     
     </div>
   )
