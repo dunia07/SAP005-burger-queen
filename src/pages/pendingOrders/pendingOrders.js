@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../../components/button';
 
 import Header from '../../components/header/innerHeader';
