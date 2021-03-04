@@ -15,29 +15,31 @@ const OrderMenu = () => {
   };
    
   return (
-    <div className='order'>
-      <Header />
-      <Navbar />
-      <div className='order-menu'>
+    <>
+    <Header />
+    <Navbar />
+    <div className='order-menu'>
+      <div className='menu-select'>
         <select className='yellow-text' id='menu' value={menuSelect} onChange= {HandleMenuSelect}>
           <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
           <option value='Resto do dia'>Almoço/Jantar</option>
           <option value='Café da Manhã'>Café da Manhã</option>
-        </select>   
-        <>
-          {
-            (menuSelect === 'Selecione o Menu') ?
-            <Allday />
-            :
-            (menuSelect === 'Resto do dia') ?
-            <Allday />
-            :
-            <Breakfast />
-          }
-        </>
+        </select>
       </div>
-      <Footer />
-    </div>  
+      <>
+        {
+          (menuSelect === 'Selecione o Menu') ?
+          <Allday />
+          :
+          (menuSelect === 'Resto do dia') ?
+          <Allday />
+          :
+          <Breakfast />
+        }
+      </>
+    </div>
+    {/* <Footer /> */}
+  </> 
   )
 }
 

@@ -14,9 +14,7 @@ function Header () {
   }
 
   return(
-    <header 
-      className='inner-header'
-      >
+    <header className='inner-header'>
       <img 
         src={logo2} 
         id='inner-logo' 
