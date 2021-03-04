@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '../../components/button';
-
 import Header from '../../components/header/innerHeader';
 import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer'
 
-
 const FinalizedOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
-  const [orderStatus, setOrderStatus] = useState([{status: 'Pedido entregue'}]);
+  const [orderStatus, setOrderStatus] = useState([]);
 
   const getOrders = useCallback (() => {
     
@@ -27,17 +24,15 @@ const FinalizedOrders = () => {
         console.log(json);
         const order = json.filter(item => item.status === 'Pedido entregue')
         setOrder(order)
-        
       });
-    
+
   }, [token])
 
   useEffect(() => {
     getOrders()
   }, [getOrders])
-
-  const finalized = (productId) => {
     
+  useEffect((productId) => {
     fetch(`https://lab-api-bq.herokuapp.com/orders/${productId}`, {
       method: 'PUT',
       headers: {
@@ -46,21 +41,28 @@ const FinalizedOrders = () => {
         'Authorization': `${token}`
       },
       body: JSON.stringify({
-          'status': 'Pedido finalizado'
+        'status': 'Pedido finalizado'
       })
     })
     .then((response) => response.json())
     .then((json) => {
       console.log(json)
       setOrderStatus({...orderStatus, status: 'Pedido finalizado'})
+      getOrders()
     })
-  }
-
+  })
+  
   return (
     <div className='finalized-orders'>
       <Header />
       <Navbar />
-      <div className='show-product'>  
+      <div className='show-product'>
+        <Button 
+          className='button'
+          name='Atualizar Pedidos'
+          type='submit'
+          onClick= {() => {getOrders()}}
+        /> 
 
         {order && order.map (function (product, index) {
           return(
@@ -77,7 +79,7 @@ const FinalizedOrders = () => {
                   <p>Status: {product.status}</p>
                   <p>Data/Hora: {product.createdAt}</p>
                 </div>
-                <p>{product.Products.map(function(item) {
+                <div>{product.Products.map(function(item) {
                   console.log(item)
                   return(
                     <div key={item.id}>
@@ -85,13 +87,7 @@ const FinalizedOrders = () => {
                       <p>Item {item.name} </p>                  
                     </div>                    
                   )})}
-                  <Button 
-                    className='button'
-                    name='Entregar pedido'
-                    type='submit'
-                    onClick= {() => {finalized(product.id)}}
-                  />
-                </p>
+                </div>
               </span>
             </div>
           )

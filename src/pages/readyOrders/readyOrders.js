@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '../../components/button';
-
 import Header from '../../components/header/innerHeader'
-
+import Navbar from '../../components/navbar/navbar';
+import Footer from '../../components/footer'
 
 const ReadyOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
-  const [orderStatus, setOrderStatus] = useState([{status: 'Pedido pronto'}]);
+  const [orderStatus, setOrderStatus] = useState([]);
 
   const getOrders = useCallback (() => {
     
@@ -27,7 +26,7 @@ const ReadyOrders = () => {
         setOrder(order)
         
       });
-    
+
   }, [token])
 
   useEffect(() => {
@@ -44,26 +43,31 @@ const ReadyOrders = () => {
         'Authorization': `${token}`
       },
       body: JSON.stringify({
-          'status': 'Pedido entregue'
+        'status': 'Pedido entregue'
       })
     })
     .then((response) => response.json())
     .then((json) => {
       console.log(json)
       setOrderStatus({...orderStatus, status: 'Pedido entregue'})
+      getOrders()
     })
   }
   
   return (
     <div className='readyOrders'>
       <Header />
-      
-      <div className='show-product'>  
-
+      <Navbar />
+      <div className='show-product'>
+        <Button 
+          className='button'
+          name='Atualizar Pedidos'
+          type='submit'
+          onClick= {() => {getOrders()}}
+        /> 
         {order && order.map (function (product, index) {
           return(
             <div  key={index}>
-            
               <span><p>Atendente: {product.user_id}</p></span>
               <span>
                 <div>
@@ -75,7 +79,7 @@ const ReadyOrders = () => {
                   <p>Status: {product.status}</p>
                   <p>Data/Hora: {product.createdAt}</p>
                 </div>
-                <p>{product.Products.map(function(item) {
+                <div>{product.Products.map(function(item) {
                   console.log(item)
                   return(
                     <div key={item.id}>
@@ -89,26 +93,13 @@ const ReadyOrders = () => {
                     type='submit'
                     onClick= {() => {finalizedOrders(product.id)}}
                   />
-                </p>
+                </div>
               </span>
             </div>
           )
         })}
-
       </div>
-
-      <p>
-        <Link to='/order-menu'>
-          <span id='button' className='textRegister'>Menu Pedidos</span>
-        </Link>  
-      </p>
-      <p>
-        <Link to='/finalized-orders'>
-          <span id='button' className='textRegister'>Pedidos Finalizados</span>
-        </Link>  
-      </p>
-      <Link to='/'><button type='submit' className='buttonLogout' id='btn-logOut'>Sair</button></Link>
-
+      <Footer />
     </div>
   )
 }
