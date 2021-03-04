@@ -1,8 +1,9 @@
 import React from 'react';
 
-function Input ({required, name, className, id, type, value, placeholder, onChange}) {
+function Input ({checked, required, name, className, id, type, value, placeholder, onChange}) {
     return(
         <input
+            checked={checked}
             required={required}
             className={className}
             name={name}

@@ -112,30 +112,26 @@ const Allday = () => {
 
   return (
     <div className='product'>
-      {/* <Navbar /> */}
-    
       <div className='show-input'>
-        
         <section>
           <Input
             required
-            className='input'
+            className='client-data'
             name='userCliente'
             type='text'
-            placeholder='Nome do Cliente'
+            placeholder='  Cliente'
             onChange={(e) => setClient (e.target.value)}
           />
           <Input
             required
-            className='input'
+            className='table-input'
             name='userMesa'
             type='text'
-            placeholder='Número da Mesa'
+            placeholder='  Mesa'
             onChange={(e) => setTable (e.target.value)}
           />
-
           <Button 
-          className='add'
+          className='button-add'
           name='+'
           type='submit'
           onClick= {(event) => HandleClienteMesa(event)}
@@ -168,12 +164,16 @@ const Allday = () => {
 
         {itemPedido !== [] && 
           <div>
-            <section className='titulo-lista-pedido'>
-              <p>RESUMO DO PEDIDO</p>
-              <p>Atendente: {nameAtendente}</p>
-              <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p> 
-              <label>Item: </label>
-              <label>R$ </label> 
+            <section>
+              <div id='resume-title'>
+                RESUMO DO PEDIDO
+              </div>
+              <div className='card-resume'>
+                <p> Atendente: {nameAtendente}</p>
+                <p> Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p> 
+                <label> Item: </label>
+                <label> R$ </label>
+              </div>
             </section>
             <ul>
               {itemPedido.map((product, index) => (

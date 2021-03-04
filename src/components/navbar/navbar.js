@@ -18,6 +18,7 @@ function Navbar() {
           (
             <>
             <Input
+              checked='checked'
               className='navbar-hall'
               id='order-menu'
               type='radio'
