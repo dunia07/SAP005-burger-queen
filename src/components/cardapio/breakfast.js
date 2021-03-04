@@ -188,7 +188,7 @@ const Breakfast = () => {
               </div>
               <div className='card-resume'>
                 <p>Atendente: {nameAtendente}</p>
-                <p>Cliente: {mesaPedido[0].client} Mesa: {mesaPedido[0].table}</p> 
+                <p>Cliente: {client} Mesa: {table}</p> 
                 <label>Item: </label>
                 <label>R$ </label>
               </div> 
