@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../../components/button';
-
 import Header from '../../components/header/innerHeader';
 import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer'
@@ -9,13 +8,6 @@ const PendingOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
   const [orderStatus, setOrderStatus] = useState([]);
-
- // const [orderAtual, setOrderAtual] = useContext([order]);
-  
-  // const handleRefresh = () => {
-  //   const atualizar = useContext(order)[0]
-  //   setOrder([atualizar]);
-  // };
 
   const getOrders = useCallback (() => {
     
@@ -34,7 +26,7 @@ const PendingOrders = () => {
         setOrder(order)
         
       });
-    
+
   }, [token])
 
   useEffect(() => {
@@ -58,36 +50,24 @@ const PendingOrders = () => {
     .then((json) => {
       console.log(json)
       setOrderStatus({...orderStatus, status: 'Pedido pronto'})
-      // window.location.reload()
       getOrders()
     })
-
   }
-
-  
-
-  // componentDidUpdate(prevProps, prevState){
-  //   if (prevState.orders !== this.state.orders) {
-  //     document.title = `Você clicou ${this.state.orders} vezes`;
-  //   }
-  // }
-
-
-  // useEffect(() => {
-    
-  // }, [orders])
-
 
   return (
     <div className='pending'>
       <Header />
       <Navbar />
-      <div className='show-product'>  
-
+      <div className='show-product'> 
+        <Button 
+          className='button'
+          name='Atualizar Pedidos'
+          type='submit'
+          onClick= {() => {getOrders()}}
+        /> 
         {order && order.map (function (product, index) {
           return(
             <div  key={index}>
-            
               <span><p>Atendente: {product.user_id}</p></span>
               <span>
                 <div>
@@ -96,10 +76,10 @@ const PendingOrders = () => {
                   <p>Pedido Nº: {product.id}</p>
                 </div>
                 <div>
-                  <p>Status: {product.status}</p>
+                  <p>Status: {order === 'pending'} Pedido Pendente</p>
                   <p>Data/Hora: {product.createdAt}</p>
                 </div>
-                <p>{product.Products.map(function(item) {
+                <div>{product.Products.map(function(item) {
                   console.log(item)
                   return(
                     <div key={item.id}>
@@ -113,7 +93,7 @@ const PendingOrders = () => {
                     type='submit'
                     onClick= {() => {readyOrders(product.id)}}
                   />
-                </p>
+                </div>
               </span>
             </div>
           )
