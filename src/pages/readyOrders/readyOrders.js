@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../../components/button';
-
 import Header from '../../components/header/innerHeader'
 import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer'
-
 
 const ReadyOrders = () => {
   const token = localStorage.getItem('userToken') 
@@ -28,7 +26,7 @@ const ReadyOrders = () => {
         setOrder(order)
         
       });
-    
+
   }, [token])
 
   useEffect(() => {
@@ -45,7 +43,7 @@ const ReadyOrders = () => {
         'Authorization': `${token}`
       },
       body: JSON.stringify({
-          'status': 'Pedido entregue'
+        'status': 'Pedido entregue'
       })
     })
     .then((response) => response.json())
@@ -60,12 +58,16 @@ const ReadyOrders = () => {
     <div className='readyOrders'>
       <Header />
       <Navbar />
-      <div className='show-product'>  
-
+      <div className='show-product'>
+        <Button 
+          className='button'
+          name='Atualizar Pedidos'
+          type='submit'
+          onClick= {() => {getOrders()}}
+        /> 
         {order && order.map (function (product, index) {
           return(
             <div  key={index}>
-            
               <span><p>Atendente: {product.user_id}</p></span>
               <span>
                 <div>
@@ -77,7 +79,7 @@ const ReadyOrders = () => {
                   <p>Status: {product.status}</p>
                   <p>Data/Hora: {product.createdAt}</p>
                 </div>
-                <p>{product.Products.map(function(item) {
+                <div>{product.Products.map(function(item) {
                   console.log(item)
                   return(
                     <div key={item.id}>
@@ -91,12 +93,11 @@ const ReadyOrders = () => {
                     type='submit'
                     onClick= {() => {finalizedOrders(product.id)}}
                   />
-                </p>
+                </div>
               </span>
             </div>
           )
         })}
-
       </div>
       <Footer />
     </div>
