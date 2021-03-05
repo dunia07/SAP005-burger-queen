@@ -46,35 +46,37 @@ const FinalizedOrders = () => {
       <div className='show-orders'>
         {order && order.map (function (product, index) {
           return(
-            <div className='order-conteiner' key={`finalized-orders-${product.id}`}>
-              <div className='card-orders'>
-                <div className='order-data'>
-                  <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p>
-                  <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
+            <div className='order-conteiner'>
+              <div className='order-sub-conteiner' key={`finalized-orders-${product.id}`}>
+                <div className='card-orders'>
+                  <div className='order-data'>
+                    <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p>
+                    <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
+                  </div>
+                  <div className='order-data'>
+                    <p className='yellow-text order-client'>Cliente: {product.client_name}</p>
+                    <p className='yellow-text order-table'>Mesa: {product.table}</p>
+                  </div>
+                  <div>
+                    <p className='yellow-text order-date-hour'>Data/Hora: {product.createdAt}</p>
+                  </div>
+                  <div className='order-data'>
+                    <p className='yellow-text order-status'>{product.status}</p>
+                  </div>
                 </div>
-                <div className='order-data'>
-                  <p className='yellow-text order-client'>Cliente: {product.client_name}</p>
-                  <p className='yellow-text order-table'>Mesa: {product.table}</p>
+                <div className='order-title'>
+                  <p className='yellow-text order-quant'> Quant. </p>
+                  <p className='yellow-text order-item'> Item </p>
                 </div>
-                <div>
-                  <p className='yellow-text order-date-hour'>Data/Hora: {product.createdAt}</p>
+                <div className='order-product-container'>{product.Products.map(function(item) {
+                  console.log(item)
+                  return(
+                    <div className='container-order-resume-product' key={item.id}>
+                      <p className='product-quant'>{item.qtd}</p>
+                      <p className='product-name'>{item.name} </p>                  
+                    </div>                    
+                  )})}
                 </div>
-                <div className='order-data'>
-                  <p className='yellow-text order-status'>{product.status}</p>
-                </div>
-              </div>
-              <div className='order-title'>
-                <p className='yellow-text order-quant'> Quant. </p>
-                <p className='yellow-text order-item'> Item </p>
-              </div>
-              <div className='order-product-container'>{product.Products.map(function(item) {
-                console.log(item)
-                return(
-                  <div className='container-order-resume-product' key={item.id}>
-                    <p className='product-quant'>{item.qtd}</p>
-                    <p className='product-name'>{item.name} </p>                  
-                  </div>                    
-                )})}
               </div>
             </div>
           )
