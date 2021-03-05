@@ -134,7 +134,9 @@ const Allday = () => {
         setTable([])
         limparInput()
         alert('Pedido Criado com Sucesso!');
-        
+        setMenuAlmocoJanta(prevMenuAlmocoJanta => {
+          return prevMenuAlmocoJanta.map(prevItem=> ({...prevItem, disabled: false }))
+        })
       })
     )
   };
@@ -164,20 +166,21 @@ const Allday = () => {
 
       <div className='show-product'>
         {
-          menuAlmocoJanta.map((product)=> {
+          menuAlmocoJanta.map((product, index)=> {
             return (
-              <button className='card-product' 
-                key={product.id} 
-                id={product.id} 
-                name={product.name} 
-                price={product.price}
-                disabled={product.disabled}
-                onClick ={HandleAddPedido}> 
-                <p className='white-text'>{product.name}</p> 
-                <p className='white-text'>{product.flavor}</p>
-                <p className='white-text'> {product.complement}</p>
-                <p className='white-text'>R$ {product.price},00</p> 
-              </button>
+              <div key={`allday-item-${product.id}`}>
+                <button className='card-product'  
+                  id={product.id} 
+                  name={product.name} 
+                  price={product.price}
+                  disabled={product.disabled}
+                  onClick ={HandleAddPedido}> 
+                  <p className='white-text'>{product.name}</p> 
+                  <p className='white-text'>{product.flavor}</p>
+                  <p className='white-text'> {product.complement}</p>
+                  <p className='white-text'>R$ {product.price},00</p> 
+                </button>
+              </div>
             )
           })
         }   
@@ -204,9 +207,9 @@ const Allday = () => {
             </section>
             <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
-                  <>
-                    <div className='container-order-resume-product'>
-                      <label className='product-name' key={index}> {product.name}</label>  
+                  
+                    <div className='container-order-resume-product' key={`item-allday-${product.id}`}>
+                      <label className='product-name'> {product.name}</label>  
                       <label className='product-price'> R$ {product.price},00 </label>
                       <div className='product-qtd'>              
                         <input 
@@ -238,7 +241,7 @@ const Allday = () => {
                         /> 
                       </div>                                     
                     </div>
-                  </>
+            
                   )
                 )
               }

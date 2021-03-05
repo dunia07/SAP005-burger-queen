@@ -33,22 +33,25 @@ const ReadyOrders = () => {
     getOrders()
   }, [getOrders])
 
-  const finalizedOrders = (productId) => {
+  const finalizedOrders = (orderId) => {
     
-    fetch(`https://lab-api-bq.herokuapp.com/orders/${productId}`, {
+    fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
       method: 'PUT',
       headers: {
         'accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `${token}`
+        'Authorization': `${token}`,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST'
       },
       body: JSON.stringify({
         'status': 'Pedido entregue'
       })
     })
     .then((response) => response.json())
-    .then((json) => {
-      console.log(json)
+    .then((data) => {
+      console.log(data)
       setOrderStatus({...orderStatus, status: 'Pedido entregue'})
       getOrders()
     })
@@ -67,7 +70,7 @@ const ReadyOrders = () => {
         /> 
         {order && order.map (function (product, index) {
           return(
-            <div  key={index}>
+            <div key={`ready-orders-${product.id}`}>
               <span><p>Atendente: {product.user_id}</p></span>
               <span>
                 <div>

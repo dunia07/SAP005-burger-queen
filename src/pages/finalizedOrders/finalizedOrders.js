@@ -7,8 +7,7 @@ import Footer from '../../components/footer'
 const FinalizedOrders = () => {
   const token = localStorage.getItem('userToken') 
   const [order, setOrder] = useState([])
-  const [orderStatus, setOrderStatus] = useState([]);
-
+  
   const getOrders = useCallback (() => {
     
     fetch('https://lab-api-bq.herokuapp.com/orders', {
@@ -32,26 +31,6 @@ const FinalizedOrders = () => {
     getOrders()
   }, [getOrders])
     
-  useEffect((productId) => {
-    fetch(`https://lab-api-bq.herokuapp.com/orders/${productId}`, {
-      method: 'PUT',
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`
-      },
-      body: JSON.stringify({
-        'status': 'Pedido finalizado'
-      })
-    })
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json)
-      setOrderStatus({...orderStatus, status: 'Pedido finalizado'})
-      getOrders()
-    })
-  })
-  
   return (
     <div className='finalized-orders'>
       <Header />
@@ -66,8 +45,7 @@ const FinalizedOrders = () => {
 
         {order && order.map (function (product, index) {
           return(
-            <div  key={index}>
-            
+            <div  key={`finalized-orders-${product.id}`}>
               <span><p>Atendente: {product.user_id}</p></span>
               <span>
                 <div>
