@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Breakfast from '../../components/cardapio/breakfast';
 import Allday from '../../components/cardapio/allday';
-
 import Header from '../../components/header/innerHeader';
 import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer'

@@ -21,7 +21,6 @@ const PendingOrders = () => {
     
     .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const order = json.filter(item => item.status === 'pending')
         setOrder(order)
         
@@ -34,7 +33,6 @@ const PendingOrders = () => {
   }, [getOrders])
 
   const readyOrders = (orderId) => {
-    console.log(orderId)
     
     fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
       method: 'PUT',
@@ -51,8 +49,7 @@ const PendingOrders = () => {
       })
     })
     .then((response) => response.json())
-    .then((data) => {
-      console.log(data)
+    .then(() => {
       setOrderStatus({...orderStatus, status: 'Pedido pronto'})
       getOrders()
     })
@@ -72,7 +69,7 @@ const PendingOrders = () => {
         /> 
       </div>
       <div className='show-orders'>
-        {order && order.map (function (product, index) {
+        {order && order.map (function (product) {
           return(
             <div className='order-conteiner' key={`pending-orders-${product.id}`}>
               <div className='card-orders'>
@@ -96,7 +93,6 @@ const PendingOrders = () => {
                   <p className='yellow-text order-item'> Item </p>
                 </div>
                 <div className='order-product-container'>{product.Products.map(function(item) {
-                  console.log(item)
                   return(
                     <div className='container-order-resume-product' key={item.id}>
                       <p className='product-quant'>{item.qtd}</p>

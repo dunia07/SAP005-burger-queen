@@ -92,7 +92,6 @@ const Allday = () => {
     })
     .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const getAllday = json.filter(item => item.type === 'all-day')
         const itemProduct = json.map(item =>  ({...item, disabled: false}));
         setMenuAlmocoJanta(getAllday, itemProduct)
@@ -126,8 +125,7 @@ const Allday = () => {
       })
     })
     .then((response) => response.json()
-      .then((json) => {
-        console.log(json);
+      .then(() => {
         setItemPedido([]);
         setItemValor([]);
         setClient([]);
@@ -165,7 +163,7 @@ const Allday = () => {
       </div>
       <div className='show-product'>
         {
-          menuAlmocoJanta.map((product, index)=> {
+          menuAlmocoJanta.map((product)=> {
             return (
               <div key={`allday-item-${product.id}`}>
                 <button className='card-product'  

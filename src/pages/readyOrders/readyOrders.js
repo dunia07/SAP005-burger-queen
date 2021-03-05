@@ -21,7 +21,6 @@ const ReadyOrders = () => {
     
     .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const order = json.filter(item => item.status === 'Pedido pronto')
         setOrder(order)
         
@@ -50,8 +49,7 @@ const ReadyOrders = () => {
       })
     })
     .then((response) => response.json())
-    .then((data) => {
-      console.log(data)
+    .then(() => {
       setOrderStatus({...orderStatus, status: 'Pedido entregue'})
       getOrders()
     })
@@ -70,7 +68,7 @@ const ReadyOrders = () => {
         /> 
       </div>
       <div className='show-orders'>
-          {order && order.map (function (product, index) {
+          {order && order.map (function (product) {
             return(
               <div className='order-conteiner' key={`ready-orders-${product.id}`}>
                 <div className='card-orders'>
@@ -94,7 +92,6 @@ const ReadyOrders = () => {
                   <p className='yellow-text order-item'> Item </p>
                 </div>
                 <div className='order-product-container'>{product.Products.map(function(item) {
-                  console.log(item)
                   return(
                     <div className='container-order-resume-product' key={item.id}>
                       <p className='product-quant'>{item.qtd}</p>

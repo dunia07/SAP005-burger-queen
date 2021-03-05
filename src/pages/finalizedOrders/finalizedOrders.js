@@ -20,7 +20,6 @@ const FinalizedOrders = () => {
     
     .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const order = json.filter(item => item.status === 'Pedido entregue')
         setOrder(order)
       });
@@ -44,7 +43,7 @@ const FinalizedOrders = () => {
         />
       </div>
       <div className='show-orders'>
-        {order && order.map (function (product, index) {
+        {order && order.map (function (product) {
           return(
             <div className='order-conteiner' key={`finalized-orders-${product.id}`}>
               <div className='card-orders'>
@@ -68,7 +67,6 @@ const FinalizedOrders = () => {
                 <p className='yellow-text order-item'> Item </p>
               </div>
               <div className='order-product-container'>{product.Products.map(function(item) {
-                console.log(item)
                 return(
                   <div className='container-order-resume-product' key={item.id}>
                     <p className='product-quant'>{item.qtd}</p>

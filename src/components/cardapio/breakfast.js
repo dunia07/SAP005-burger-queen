@@ -91,7 +91,6 @@ const Breakfast = () => {
     })
     .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const getBreakfast = json.filter(item => item.type === 'breakfast')
         const itemProduct = json.map(item =>  ({...item, disabled: false}));
         setMenuCafe(getBreakfast, itemProduct)
@@ -125,8 +124,7 @@ const Breakfast = () => {
       })
     })
     .then((response) => response.json()
-      .then((json) => {
-        console.log(json);
+      .then(() => {
         setItemPedido([]);
         setItemValor([]);
         setClient([]);
@@ -164,7 +162,7 @@ const Breakfast = () => {
       </div>
       <div className='show-product'>      
         {
-          menuCafe.map((product, index) => {
+          menuCafe.map((product) => {
             return (
               <div key={`breakfast-item-${product.id}`}>
                 <button className='card-product' 
@@ -243,8 +241,7 @@ const Breakfast = () => {
                 className='button'
                 name='Finalizar Pedido'
                 type='submit'
-                onClick= {() => {
-                  sendOrder()}}
+                onClick= {() => {sendOrder()}}
               />
             </div>
           </div>
