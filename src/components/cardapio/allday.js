@@ -188,55 +188,64 @@ const Allday = () => {
 
       <div className='show-resume'>  
         {itemPedido !== [] && 
-          <div>
+          <div className='resume-container'>
             <section>
               <div id='resume-title'>
                 RESUMO DO PEDIDO
               </div>
               <div className='card-resume'>
-                <p> Atendente: {nameAtendente}</p>
-                <p>Cliente: {client} Mesa: {table}</p> 
-                <label> Item: </label>
-                <label> R$ </label>
+                <p className='yellow-text waiter-data-resume'> {nameAtendente}</p>
+                <div className='client-data-resume'>
+                  <p className='yellow-text resume-client'> Cliente: {client}</p> 
+                  <p className='yellow-text resume-table'> Mesa: {table}</p> 
+                </div>
+              </div>
+              <div className='price-resume'>
+                <p className='yellow-text resume-item'> Item: </p>
+                <p className='yellow-text resume-price'> R$ </p>
               </div>
             </section>
-            <ul>
+            <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
                   
-                    <li key={`item-allday-${product.id}`}>
-                      <label > {product.name} R$ {product.price},00 </label>                   
-                      <input 
-                        className='input-quantidade'
-                        name='diminuir'
-                        type='button'
-                        value='-'
-                        onClick = {()=> {subtraiQtd(product, index)}}
-                      />
+                    <div className='container-order-resume-product' key={`item-allday-${product.id}`}>
+                      <label className='product-name'> {product.name}</label>  
+                      <label className='product-price'> R$ {product.price},00 </label>
+                      <div className='product-qtd'>              
+                        <input 
+                          className='input-quantidade'
+                          name='diminuir'
+                          type='button'
+                          value='-'
+                          onClick = {()=> {subtraiQtd(product, index)}}
+                        />
 
-                      <button>{product.qtd}</button>
+                        <button className='button-quantidade'>{product.qtd}</button>
 
-                      <input
-                        className='input-quantidade'
-                        id='aumentar-qtd'
-                        type='button'
-                        value='+'
-                        onClick={() => {addQtd(product, index)}}
-                      />
-
-                      <input
-                        className='input-excluir'
-                        id='excluir-item'
-                        type='image'
-                        src={Lixeira}
-                        alt='lixeira'
-                        onClick={() => {deleteQtd(product, index)}}
-                      />                
-                    </li>
-                  
+                        <input
+                          className='input-quantidade'
+                          id='aumentar-qtd'
+                          type='button'
+                          value='+'
+                          onClick={() => {addQtd(product, index)}}
+                        />
+                      </div>
+                      <div className='resume-trash'>
+                        <input
+                          className='input-excluir'
+                          id='excluir-item'
+                          type='image'
+                          src={Lixeira}
+                          alt='lixeira'
+                          onClick={() => {deleteQtd(product, index)}}
+                        /> 
+                      </div>                                     
+                    </div>
+            
                   )
                 )
               }
-            </ul>
+            </div>
           </div>
         }
 
