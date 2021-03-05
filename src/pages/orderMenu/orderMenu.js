@@ -38,7 +38,7 @@ const OrderMenu = () => {
         }
       </>
     </div>
-    {/* <Footer /> */}
+    <Footer />
   </> 
   )
 }
