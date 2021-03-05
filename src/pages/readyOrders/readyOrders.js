@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer'
 
 const ReadyOrders = () => {
-  const token = localStorage.getItem('userToken') 
+  const token = localStorage.getItem('userToken')
   const [order, setOrder] = useState([])
   const [orderStatus, setOrderStatus] = useState([]);
 
@@ -58,38 +58,51 @@ const ReadyOrders = () => {
   }
   
   return (
-    <div className='readyOrders'>
+    <>
       <Header />
       <Navbar />
-      <div className='show-product'>
+      <div className='refresh-orders'>
         <Button 
-          className='button'
+          className='button-refresh'
           name='Atualizar Pedidos'
           type='submit'
           onClick= {() => {getOrders()}}
         /> 
-        {order && order.map (function (product, index) {
-          return(
-            <div key={`ready-orders-${product.id}`}>
-              <span><p>Atendente: {product.user_id}</p></span>
-              <span>
-                <div>
-                  <p>Cliente: {product.client_name}</p>
-                  <p>Mesa: {product.table}</p>
-                  <p>Pedido Nº: {product.id}</p>
+      </div>
+      <div className='show-orders'>
+          {order && order.map (function (product, index) {
+            return(
+              <div className='order-conteiner' key={`ready-orders-${product.id}`}>
+                <div className='card-orders'>
+                  <div className='order-data'>
+                    <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p>
+                    <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
+                  </div>
+                  <div className='order-data'>
+                    <p className='yellow-text order-client'>Cliente: {product.client_name}</p>
+                    <p className='yellow-text order-table'>Mesa: {product.table}</p>
+                  </div>
+                  <div>
+                    <p className='yellow-text order-date-hour'>Data/Hora: {product.createdAt}</p>
+                  </div>
+                  <div className='order-data'>
+                    <p className='yellow-text order-status'>{product.status}</p>
+                  </div>
                 </div>
-                <div>
-                  <p>Status: {product.status}</p>
-                  <p>Data/Hora: {product.createdAt}</p>
+                <div className='order-title'>
+                  <p className='yellow-text order-quant'> Quant. </p>
+                  <p className='yellow-text order-item'> Item </p>
                 </div>
-                <div>{product.Products.map(function(item) {
+                <div className='order-product-container'>{product.Products.map(function(item) {
                   console.log(item)
                   return(
-                    <div key={item.id}>
-                      <p>Quant. {item.qtd}</p>
-                      <p>Item {item.name} </p>                  
+                    <div className='container-order-resume-product' key={item.id}>
+                      <p className='product-quant'>{item.qtd}</p>
+                      <p className='product-name'>{item.name} </p>                  
                     </div>                    
                   )})}
+                </div>
+                <div className='button-finalized-order'>
                   <Button 
                     className='button'
                     name='Entregar pedido'
@@ -97,13 +110,12 @@ const ReadyOrders = () => {
                     onClick= {() => {finalizedOrders(product.id)}}
                   />
                 </div>
-              </span>
-            </div>
-          )
-        })}
+              </div>
+            )
+          })}
       </div>
       <Footer />
-    </div>
+    </>
   )
 }
 

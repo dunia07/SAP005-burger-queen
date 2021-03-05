@@ -93,24 +93,23 @@
 /* Início Header */
 .inner-header {
   display: flex;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin: 10px;
+  width: 95%;
 }
 
 #inner-logo {
-	align-items: baseline;
   height: 7vmin;
 }
 
 .button-logout {
-  display: flex;
-  position: relative;
   color: #339cd3;
   border: 3px solid #339cd3;
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
-  margin-left: 32rem;
 }
 /* Fim Header */
 
@@ -214,7 +213,7 @@
   width: 50%;
 }
 
-.resume-container{
+.resume-container, .order-conteiner{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -255,6 +254,13 @@
 }
 
 .card-resume {
+  border: 3px solid #339cd3;
+  font-size: 14px;
+  cursor: pointer;
+  width: 90%;
+}
+
+.card-orders {
   color: #339cd3;
   border: 3px solid #339cd3;
   font-size: 14px;
@@ -273,6 +279,27 @@
   justify-content: center;
 }
 
+.order-title {
+  display: flex;
+  flex-direction: row;
+  color: #339cd3;
+  border: 3px solid #339cd3;
+  font-size: 14px;
+  cursor: pointer;
+  width: 90%;
+  justify-content: center;
+}
+
+.order-product-title {
+  display: flex;
+  flex-direction: row;
+  color: #339cd3;
+  border: 3px solid #339cd3;
+  font-size: 14px;
+  width: 90%;
+  justify-content: center;
+}
+
 .order-resume-container {
   display: flex;
   flex-direction: column;
@@ -284,11 +311,55 @@
   justify-content: center;
 }
 
-.client-data-resume, .waiter-data-resume {
+.order-product-container {
+  display: flex;
+  flex-direction: column;
+  color: #339cd3;
+  border: 3px solid #339cd3;
+  font-size: 14px;
+  width: 90%;
+  justify-content: center;
+}
+
+.client-data-resume, .order-data {
   display: flex;
   flex-direction: row;
   justify-content: right;
   width: 95%;
+  padding-left: 5px;
+}
+
+.waiter-data-resume, .order-data-resume {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  width: 50%;
+  padding-left: 5px;
+}
+
+.order-client, .order-table {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  width: 45%;
+  padding-left: 5px;
+}
+
+.order-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  padding-left: 5px;
+  font-size: 18px;
+
+}
+
+.order-date-hour {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90%;
   padding-left: 5px;
 }
 
@@ -299,14 +370,14 @@
   width: 50%;
 }
 
-.resume-item {
+.resume-item, .resume-price {
   display: flex;
   flex-direction: row;
   justify-content: right;
   width: 45%;
 }
 
-.resume-price {
+.order-quant, .order-item {
   display: flex;
   flex-direction: row;
   justify-content: right;
@@ -331,6 +402,14 @@
   justify-content: right;
   width: 20%;
   padding: 5px;
+}
+
+.product-quant{
+  color: white;
+  justify-content: center;
+  width: 30%;
+  padding: 5px;
+  margin-left: 30px;
 }
 
 .product-qtd {
@@ -368,6 +447,57 @@
   width: 25px;
   margin: 3px;
 }
+
+.show-total {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 16px;
+  color: white;
+  width: 80%;
+  margin: 20px;
+}
+
+.button-finalized-order {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90%;
+}
+/* Fim Order Menu */
+
+/* Início Ready Orders */
+.show-orders {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.refresh-orders {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin: 10px;
+}
+
+.button-refresh {
+  color: #339cd3;
+  border: 3px solid #339cd3;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 25px;
+}
+
+.card-orders {
+  border: 3px solid #339cd3;
+  border-radius: 5px 5px 0px 0px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Fim Ready Orders */
 
 /* Início Footer */
 footer {

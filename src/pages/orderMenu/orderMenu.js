@@ -18,7 +18,6 @@ const OrderMenu = () => {
     <>
     <Header />
     <Navbar />
-    <div className='order-menu'>
       <div className='menu-select'>
         <select className='yellow-text' id='menu' value={menuSelect} onChange= {HandleMenuSelect}>
           <option value='Selecione o Menu' disabled defaultValue>Selecione o Menu</option>
@@ -37,7 +36,6 @@ const OrderMenu = () => {
           <Breakfast />
         }
       </>
-    </div>
     <Footer />
   </> 
   )
