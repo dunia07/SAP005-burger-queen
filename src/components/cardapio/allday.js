@@ -11,14 +11,14 @@ const Allday = () => {
   const [table, setTable] = useState(''); 
   const [itemPedido, setItemPedido] = useState([]);
   const [itemValor, setItemValor] = useState(0);
- 
+
   const HandleAddPedido = (e) => {
     e.preventDefault()
     const product = e.target.parentNode;
     const idProduct = Number(product.getAttribute('id'))
     const nameProduct = product.getAttribute('name')
     const priceProduct = product.getAttribute('price')
-   
+
     const pedido = {
       client: client,
       table: table, 
@@ -36,7 +36,7 @@ const Allday = () => {
       return prevMenuCafe.map(prevItem => prevItem.id === idProduct ? {...prevItem, disabled: true } : prevItem)
     })
   }
-   
+
   const limparInput = () => {
     const inputs = document.querySelectorAll('input');
     [].map.call(inputs, (entrada) => (entrada.value = ''));
@@ -163,7 +163,6 @@ const Allday = () => {
           />       
         </section>
       </div>
-
       <div className='show-product'>
         {
           menuAlmocoJanta.map((product, index)=> {
@@ -185,8 +184,7 @@ const Allday = () => {
           })
         }   
       </div>
-
-      <div className='show-resume'>  
+      <div className='show-resume'>
         {itemPedido !== [] && 
           <div className='resume-container'>
             <section>
@@ -207,60 +205,52 @@ const Allday = () => {
             </section>
             <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
-                  
-                    <div className='container-order-resume-product' key={`item-allday-${product.id}`}>
-                      <label className='product-name'> {product.name}</label>  
-                      <label className='product-price'> R$ {product.price},00 </label>
-                      <div className='product-qtd'>              
-                        <input 
-                          className='input-quantidade'
-                          name='diminuir'
-                          type='button'
-                          value='-'
-                          onClick = {()=> {subtraiQtd(product, index)}}
-                        />
-
-                        <button className='button-quantidade'>{product.qtd}</button>
-
-                        <input
-                          className='input-quantidade'
-                          id='aumentar-qtd'
-                          type='button'
-                          value='+'
-                          onClick={() => {addQtd(product, index)}}
-                        />
-                      </div>
-                      <div className='resume-trash'>
-                        <input
-                          className='input-excluir'
-                          id='excluir-item'
-                          type='image'
-                          src={Lixeira}
-                          alt='lixeira'
-                          onClick={() => {deleteQtd(product, index)}}
-                        /> 
-                      </div>                                     
-                    </div>
-            
-                  )
-                )
-              }
+                <div className='container-order-resume-product' key={`item-allday-${product.id}`}>
+                  <label className='product-name'> {product.name}</label>  
+                  <label className='product-price'> R$ {product.price},00 </label>
+                  <div className='product-qtd'>              
+                    <input 
+                      className='input-quantidade'
+                      name='diminuir'
+                      type='button'
+                      value='-'
+                      onClick = {()=> {subtraiQtd(product, index)}}
+                    />
+                    <button className='button-quantidade'>{product.qtd}</button>
+                    <input
+                      className='input-quantidade'
+                      id='aumentar-qtd'
+                      type='button'
+                      value='+'
+                      onClick={() => {addQtd(product, index)}}
+                    />
+                  </div>
+                  <div className='resume-trash'>
+                    <input
+                      className='input-excluir'
+                      id='excluir-item'
+                      type='image'
+                      src={Lixeira}
+                      alt='lixeira'
+                      onClick={() => {deleteQtd(product, index)}}
+                    /> 
+                  </div>                                     
+                </div>
+              ))}
+              <div className='show-total'>
+                Sub total: R$ {itemValor},00
+              </div>
             </div>
+            <div className='button-finalized-order'>
+              <Button 
+                className='button'
+                name='Finalizar Pedido'
+                type='submit'
+                onClick= {() => {sendOrder()}}
+              />
+            </div> 
           </div>
         }
-
-        <div className='show-total'>
-      
-          <p> Total Pedido: R$ {itemValor},00</p>
-
-          <Button 
-            className='button'
-            name='Finalizar Pedido'
-            type='submit'
-            onClick= {() => {sendOrder()}}
-          /> 
-              
-        </div>
       </div>   
     </div>
   )
