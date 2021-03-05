@@ -32,9 +32,9 @@ Ambos os setores podem ver uma lista com todos os pedidos que foram finalizados 
 
 ## 3. Histórias de Usuários :woman::man:
 
-![](/src/image/historia_usuario_01.PNG)
+![](/src/image/historia01.jpeg)
 
-![](/src/image/historia_usuario_02.PNG)
+![](/src/image/historia02.jpeg)
 
 ## 4.Interface de Usuário :iphone::computer:
 
@@ -50,9 +50,17 @@ O protótipo foi desenvolvido utilizando o _figma_, e testado a usabilidade faze
 
 Durante a implantação algumas melhorias foram feitas para melhorar a experiência dos usuários, chegando na página final.
 
-![](/src/image/layout_final_01.jpeg)
+![](/src/image/login.jpeg)
 
-![](/src/image/layout_final_02.jpeg)
+![](/src/image/menupedidos.jpeg)
+
+![](/src/image/menupedidos2.jpeg)
+
+![](/src/image/pedidospendentes.jpeg)
+
+![](/src/image/pedidosprontos.jpeg)
+
+![](/src/image/pedidosfinalizados.jpeg)
 
 ## 5. Desenvolvimento :calendar:
 
@@ -62,7 +70,7 @@ Utilizamos a ferramenta Projects do gitHub para organizar todas as atividades a 
 
 Abaixo nosso quadro de organização:
 
-![](/src/image/gitHub_projects.PNG)
+![](/src/image/gitHub_projects.jpeg)
 
 ## 6. Bibliotecas e Ferramentas Utilizadas :open_file_folder::pushpin:
 
