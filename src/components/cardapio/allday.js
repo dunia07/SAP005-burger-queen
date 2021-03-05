@@ -134,7 +134,9 @@ const Allday = () => {
         setTable([])
         limparInput()
         alert('Pedido Criado com Sucesso!');
-        
+        setMenuAlmocoJanta(prevMenuAlmocoJanta => {
+          return prevMenuAlmocoJanta.map(prevItem=> ({...prevItem, disabled: false }))
+        })
       })
     )
   };
@@ -164,20 +166,21 @@ const Allday = () => {
 
       <div className='show-product'>
         {
-          menuAlmocoJanta.map((product)=> {
+          menuAlmocoJanta.map((product, index)=> {
             return (
-              <button className='card-product' 
-                key={product.id} 
-                id={product.id} 
-                name={product.name} 
-                price={product.price}
-                disabled={product.disabled}
-                onClick ={HandleAddPedido}> 
-                <p className='white-text'>{product.name}</p> 
-                <p className='white-text'>{product.flavor}</p>
-                <p className='white-text'> {product.complement}</p>
-                <p className='white-text'>R$ {product.price},00</p> 
-              </button>
+              <div key={`allday-item-${product.id}`}>
+                <button className='card-product'  
+                  id={product.id} 
+                  name={product.name} 
+                  price={product.price}
+                  disabled={product.disabled}
+                  onClick ={HandleAddPedido}> 
+                  <p className='white-text'>{product.name}</p> 
+                  <p className='white-text'>{product.flavor}</p>
+                  <p className='white-text'> {product.complement}</p>
+                  <p className='white-text'>R$ {product.price},00</p> 
+                </button>
+              </div>
             )
           })
         }   
@@ -192,16 +195,16 @@ const Allday = () => {
               </div>
               <div className='card-resume'>
                 <p> Atendente: {nameAtendente}</p>
-                <p> Cliente: {client} Mesa: {table}</p> 
+                <p>Cliente: {client} Mesa: {table}</p> 
                 <label> Item: </label>
                 <label> R$ </label>
               </div>
             </section>
             <ul>
               {itemPedido.map((product, index) => (
-                  <>
-                    <li>
-                      <label key={index}> {product.name} R$ {product.price},00 </label>                   
+                  
+                    <li key={`item-allday-${product.id}`}>
+                      <label > {product.name} R$ {product.price},00 </label>                   
                       <input 
                         className='input-quantidade'
                         name='diminuir'
@@ -229,7 +232,7 @@ const Allday = () => {
                         onClick={() => {deleteQtd(product, index)}}
                       />                
                     </li>
-                  </>
+                  
                   )
                 )
               }

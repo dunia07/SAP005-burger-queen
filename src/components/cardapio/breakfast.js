@@ -133,8 +133,11 @@ const Breakfast = () => {
         setTable([]);
         limparInput();
         alert('Pedido Criado com Sucesso!');
+        setMenuCafe(prevMenuCafe => {
+          return prevMenuCafe.map(prevItem=> ({...prevItem, disabled: false }))
+        })
       })
-    )   
+    )  
   };
   
   return (
@@ -162,18 +165,19 @@ const Breakfast = () => {
 
       <div className='show-product'>      
         {
-          menuCafe.map((product) => {
+          menuCafe.map((product, index) => {
             return (
-              <button className='card-product' 
-                key={product.id} 
-                id={product.id} 
-                name={product.name} 
-                price={product.price}
-                disabled={product.disabled}
-                onClick ={HandleAddPedido} >            
-                <p className='white-text'>{product.name}</p> 
-                <p className='white-text'>R$ {product.price},00</p> 
-              </button>
+              <div key={`breakfast-item-${product.id}`}>
+                <button className='card-product' 
+                  id={product.id} 
+                  name={product.name} 
+                  price={product.price}
+                  disabled={product.disabled}
+                  onClick ={HandleAddPedido} >            
+                  <p className='white-text'>{product.name}</p> 
+                  <p className='white-text'>R$ {product.price},00</p> 
+                </button>
+              </div>
             )
           })
         } 
@@ -195,9 +199,9 @@ const Breakfast = () => {
             </section>
             <ul>
               {itemPedido.map((product, index) => (
-                  <>
-                    <li>
-                      <label key={index}> {product.name} R$ {product.price},00 </label>                      
+                  
+                    <li key={`item-breakfast-${product.id}`}>
+                      <label> {product.name} R$ {product.price},00 </label>                      
                       <input 
                         className='input-quantidade'
                         name='diminuir'
@@ -225,7 +229,7 @@ const Breakfast = () => {
                         onClick={() => {deleteQtd(product, index)}}
                       />                
                     </li>
-                  </>
+                  
                   )
                 )
               }
@@ -241,7 +245,9 @@ const Breakfast = () => {
             className='button'
             name='Finalizar Pedido'
             type='submit'
-            onClick= {() => {sendOrder()}}
+            onClick= {() => {
+
+              sendOrder()}}
           />  
              
         </div>
