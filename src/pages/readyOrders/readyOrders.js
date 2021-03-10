@@ -77,6 +77,7 @@ const ReadyOrders = () => {
       </div>
       <div className='show-orders'>
           {order && order.map (function (product) {
+            const name = localStorage.getItem('userName')
             const dateHourApiInitial = Date.parse(product.createdAt);
             const dateConvert = new Date(dateHourApiInitial).toLocaleString();
             const dateHourApiFinal = Date.parse(product.updatedAt); 
@@ -85,8 +86,8 @@ const ReadyOrders = () => {
               <div className='order-conteiner'>
                 <div className='order-sub-conteiner' key={`ready-orders-${product.id}`}>
                   <div className='card-orders'>
-                    <div className='order-data'>
-                      <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p>
+                    <div className='order-data-init'>
+                      <p className='yellow-text waiter-data-resume'>Atendente: {name}</p>
                       <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
                     </div>
                     <div className='order-data'>

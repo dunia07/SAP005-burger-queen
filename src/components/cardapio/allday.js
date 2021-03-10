@@ -192,7 +192,7 @@ const Allday = () => {
                 RESUMO DO PEDIDO
               </div>
               <div className='card-resume'>
-                <p className='yellow-text waiter-data-resume'> {nameAtendente}</p>
+                <p className='yellow-text waiter-data-resume'> Atendente: {nameAtendente}</p>
                 <div className='client-data-resume'>
                   <p className='yellow-text resume-client'> Cliente: {client}</p> 
                   <p className='yellow-text resume-table'> Mesa: {table}</p> 
@@ -206,8 +206,8 @@ const Allday = () => {
             <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
                 <div className='container-order-resume-product' key={`item-allday-${product.id}`}>
-                  {/* <label className='product-name'>{product.name}</label> */}
-                  <label className='product-name'>{product.name + product.flavor} </label>
+                  <label className='product-name'>{product.name}</label>
+                  {/* <label className='product-name'>{product.name + product.flavor} </label> */}
                   {/* <label className='product-name'>{product.name + product.name.flavor + product.name.flavor.complement} </label>  */}
                   {/* <label className='product-name'>`${product.name}` + `${product.flavor} + `${product.complement}` </label>  */}
                   {/* <label className='product-name'>{product.name} + {product.flavor} + {product.complement} </label>  */}

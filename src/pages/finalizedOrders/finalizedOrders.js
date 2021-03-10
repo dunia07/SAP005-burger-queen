@@ -51,6 +51,8 @@ const FinalizedOrders = () => {
       </div>
       <div className='show-orders'>
         {order && order.map (function (product) {
+          const name = localStorage.getItem('userName')
+
           const dateHourApiInitial = Date.parse(product.createdAt);
           const dateConvert = new Date(dateHourApiInitial).toLocaleString();
 
@@ -67,8 +69,8 @@ const FinalizedOrders = () => {
             <div className='order-conteiner'>
               <div className='order-sub-conteiner' key={`finalized-orders-${product.id}`}>
                 <div className='card-orders'>
-                  <div className='order-data'>
-                    <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p>
+                  <div className='order-data-init'>
+                    <p className='yellow-text waiter-data-resume'>Atendente: {name}</p>
                     <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
                   </div>
                   <div className='order-data'>
@@ -76,11 +78,11 @@ const FinalizedOrders = () => {
                     <p className='yellow-text order-table'>Mesa: {product.table}</p>
                   </div>
                   <div>
-                    <p className='yellow-text order-date-hour'>Data/Hora: {dateConvert}</p>
-                    <div>
-                      <p className='yellow-text order-date-hour'>Tempo de Preparo: {timeFinished}</p>
-                      <p className='yellow-text order-date-hour'>Tempo de Entrega: {timeDelivery}</p>
+                    <div className= 'order-data'>
+                      <p className='yellow-text order-date-hour'>Data/Hora: {dateConvert}</p>
                     </div>
+                    <p className='yellow-text order-date-hour'>Tempo de Preparo: {timeFinished}</p>
+                    <p className='yellow-text order-date-hour'>Tempo de Entrega: {timeDelivery}</p>
                     <p className='yellow-text order-date-hour'>Tempo de Total: {timeOrder}</p>
                   </div>
                   <div className='order-data'>

@@ -189,7 +189,7 @@ const Breakfast = () => {
                 RESUMO DO PEDIDO
               </div>
               <div className='card-resume'>
-                <p className='yellow-text waiter-data-resume'> {nameAtendente}</p>
+                <p className='yellow-text waiter-data-resume'> Atendente: {nameAtendente}</p>
                 <div className='client-data-resume'>
                   <p className='yellow-text resume-client'> Cliente: {client}</p> 
                   <p className='yellow-text resume-table'> Mesa: {table}</p> 

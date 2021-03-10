@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer'
 
 const PendingOrders = () => {
-  const token = localStorage.getItem('userToken') 
+  const token = localStorage.getItem('userToken')
   const [order, setOrder] = useState([])
   const [orderStatus, setOrderStatus] = useState([]);
 
@@ -73,14 +73,16 @@ const PendingOrders = () => {
       </div>
       <div className='show-orders'>
         {order && order.map (function (product) {
+          const name = localStorage.getItem('userName')
           const dateHourApi = Date.parse(product.createdAt); 
           const dateConvert = new Date(dateHourApi).toLocaleString();
           return(
             <div className='order-conteiner'>
               <div className='order-sub-conteiner' key={`pending-orders-${product.id}`}>
                 <div className='card-orders'>
-                    <div className='order-data'>
-                      <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p>
+                    <div className='order-data-init'>
+                      {/* <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p> */}
+                      <p className='yellow-text waiter-data-resume'>Atendente: {name}</p>
                       <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
                     </div>
                     <div className='order-data'>
