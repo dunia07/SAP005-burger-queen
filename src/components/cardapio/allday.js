@@ -165,7 +165,7 @@ const Allday = () => {
       </div>
       <div className='show-product'>
         {
-          menuAlmocoJanta.map((product, index)=> {
+          menuAlmocoJanta.map((product)=> {
             return (
               <div key={`allday-item-${product.id}`}>
                 <button className='card-product'  
@@ -206,7 +206,12 @@ const Allday = () => {
             <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
                 <div className='container-order-resume-product' key={`item-allday-${product.id}`}>
-                  <label className='product-name'> {product.name}</label>  
+                  {/* <label className='product-name'>{product.name}</label> */}
+                  <label className='product-name'>{product.name + product.flavor} </label>
+                  {/* <label className='product-name'>{product.name + product.name.flavor + product.name.flavor.complement} </label>  */}
+                  {/* <label className='product-name'>`${product.name}` + `${product.flavor} + `${product.complement}` </label>  */}
+                  {/* <label className='product-name'>{product.name} + {product.flavor} + {product.complement} </label>  */}
+                  {/* <label className='product-name'><span>{product.name}</span> + <span>{product.flavor}</span> + <span>{product.complement}</span></label>   */}
                   <label className='product-price'> R$ {product.price},00 </label>
                   <div className='product-qtd'>              
                     <input 

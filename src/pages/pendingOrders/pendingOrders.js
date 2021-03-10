@@ -72,7 +72,9 @@ const PendingOrders = () => {
         /> 
       </div>
       <div className='show-orders'>
-        {order && order.map (function (product, index) {
+        {order && order.map (function (product) {
+          const dateHourApi = Date.parse(product.createdAt); 
+          const dateConvert = new Date(dateHourApi).toLocaleString();
           return(
             <div className='order-conteiner'>
               <div className='order-sub-conteiner' key={`pending-orders-${product.id}`}>
@@ -86,7 +88,7 @@ const PendingOrders = () => {
                       <p className='yellow-text order-table'>Mesa: {product.table}</p>
                     </div>
                     <div>
-                      <p className='yellow-text order-date-hour'>Data/Hora: {product.createdAt}</p>
+                      <p className='yellow-text order-date-hour'>Data/Hora: {dateConvert}</p>
                     </div>
                     <div className='order-data'>
                       <p className='yellow-text order-status'>{order === 'pending'} Pedido Pendente</p>

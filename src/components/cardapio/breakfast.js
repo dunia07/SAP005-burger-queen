@@ -164,7 +164,7 @@ const Breakfast = () => {
       </div>
       <div className='show-product'>      
         {
-          menuCafe.map((product, index) => {
+          menuCafe.map((product) => {
             return (
               <div key={`breakfast-item-${product.id}`}>
                 <button className='card-product' 
