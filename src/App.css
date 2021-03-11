@@ -133,12 +133,7 @@
   border-radius: 5px;
 }
 
-.hall-navbar Input[type=radio] {
-  display: none;
-  cursor: pointer;
-}
-
-.hall-navbar Input[type=radio]+label {
+.navbar-link {
   background-color: #403D3D;
   color: rgb(143, 140, 140);
   padding: 0.2rem 0.5rem;
@@ -146,9 +141,10 @@
   cursor: pointer;
   text-align: center;
   font-size: 18px;
+  text-decoration: none;
 }
 
-.hall-navbar Input[type=radio]:checked+label {
+.navbar-link.active {
   background-color: #339cd3;
   color: #000000;
 }
