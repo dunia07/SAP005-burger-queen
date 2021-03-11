@@ -111,7 +111,7 @@ const ReadyOrders = () => {
                     return(
                       <div className='container-order-resume-product' key={item.id}>
                         <p className='product-quant'>{item.qtd}</p>
-                        <p className='product-name'>{item.name} </p>                  
+                        <p className='product-name'>{item.name} {item.flavor} {item.complement}</p>                  
                       </div>                    
                     )})}
                   </div>

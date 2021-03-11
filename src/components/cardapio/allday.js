@@ -18,6 +18,8 @@ const Allday = () => {
     const idProduct = Number(product.getAttribute('id'))
     const nameProduct = product.getAttribute('name')
     const priceProduct = product.getAttribute('price')
+    const flavorProduct = product.getAttribute('flavor')
+    const complementProduct = product.getAttribute('complement')
 
     const pedido = {
       client: client,
@@ -25,6 +27,8 @@ const Allday = () => {
       id: idProduct,
       name: nameProduct,
       price: priceProduct,
+      flavor: flavorProduct,
+      complement: complementProduct,
       qtd: 1
     }
 
@@ -123,6 +127,7 @@ const Allday = () => {
               'qtd': Number(product.qtd)
             }
           ))
+          
       })
     })
     .then((response) => response.json()
@@ -140,6 +145,8 @@ const Allday = () => {
       })
     )
   };
+
+  console.log(itemPedido)
 
   return (
     <div className='product'>
@@ -172,6 +179,8 @@ const Allday = () => {
                   id={product.id} 
                   name={product.name} 
                   price={product.price}
+                  flavor={product.flavor}
+                  complement={product.complement}
                   disabled={product.disabled}
                   onClick ={HandleAddPedido}> 
                   <p className='white-text'>{product.name}</p> 
@@ -205,13 +214,8 @@ const Allday = () => {
             </section>
             <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
-                <div className='container-order-resume-product' key={`item-allday-${product.id}`}>
-                  <label className='product-name'>{product.name}</label>
-                  {/* <label className='product-name'>{product.name + product.flavor} </label> */}
-                  {/* <label className='product-name'>{product.name + product.name.flavor + product.name.flavor.complement} </label>  */}
-                  {/* <label className='product-name'>`${product.name}` + `${product.flavor} + `${product.complement}` </label>  */}
-                  {/* <label className='product-name'>{product.name} + {product.flavor} + {product.complement} </label>  */}
-                  {/* <label className='product-name'><span>{product.name}</span> + <span>{product.flavor}</span> + <span>{product.complement}</span></label>   */}
+                <div className='container-order-resume-product' key={`item-allday-${product.id}` }>
+                  <label className='product-name-resume'>{product.name} {product.flavor} {product.complement}</label>
                   <label className='product-price'> R$ {product.price},00 </label>
                   <div className='product-qtd'>              
                     <input 
@@ -242,6 +246,7 @@ const Allday = () => {
                   </div>                                     
                 </div>
               ))}
+              
               <div className='show-total'>
                 Sub total: R$ {itemValor},00
               </div>

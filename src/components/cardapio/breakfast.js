@@ -203,7 +203,7 @@ const Breakfast = () => {
             <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
                 <div className='container-order-resume-product' key={`item-breakfast-${product.id}`}>
-                  <label className='product-name'> {product.name}</label>  
+                  <label className='product-name-resume'> {product.name}</label>  
                   <label className='product-price'> R$ {product.price},00 </label>                     
                   <div className='product-qtd'>
                     <input 

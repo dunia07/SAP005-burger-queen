@@ -34,8 +34,7 @@ const PendingOrders = () => {
   }, [getOrders])
 
   const readyOrders = (orderId) => {
-    console.log(orderId)
-    
+       
     fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
       method: 'PUT',
       headers: {
@@ -81,7 +80,6 @@ const PendingOrders = () => {
               <div className='order-sub-conteiner' key={`pending-orders-${product.id}`}>
                 <div className='card-orders'>
                     <div className='order-data-init'>
-                      {/* <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p> */}
                       <p className='yellow-text waiter-data-resume'>Atendente: {name}</p>
                       <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
                     </div>
@@ -105,7 +103,7 @@ const PendingOrders = () => {
                     return(
                       <div className='container-order-resume-product' key={item.id}>
                         <p className='product-quant'>{item.qtd}</p>
-                        <p className='product-name'>{item.name} </p>                  
+                        <p className='product-name'>{item.name} {item.flavor} {item.complement}</p>                  
                       </div>                    
                     )})}
                   </div>
