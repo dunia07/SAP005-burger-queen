@@ -30,7 +30,13 @@ const FinalizedOrders = () => {
   useEffect(() => {
     getOrders()
   }, [getOrders])
-    
+
+  const time = (milisegundos) => {
+    const minutes = Math.floor(milisegundos / 60000);
+    const seconds = ((milisegundos % 60000) / 1000).toFixed(0);
+    return (seconds === 60? (minutes + 1) + ": 00": minutes + ":" + (seconds <10? "0": "") + seconds);
+  }
+
   return (
     <>
       <Header />
@@ -44,13 +50,27 @@ const FinalizedOrders = () => {
         />
       </div>
       <div className='show-orders'>
-        {order && order.map (function (product, index) {
+        {order && order.map (function (product) {
+          const name = localStorage.getItem('userName')
+
+          const dateHourApiInitial = Date.parse(product.createdAt);
+          const dateConvert = new Date(dateHourApiInitial).toLocaleString();
+
+          const dateHourApiFinished = Date.parse(product.processedAt); 
+          const timeFinished = time(dateHourApiFinished - dateHourApiInitial )
+
+          const dateHourApiDelivery = Date.parse(product.updatedAt); 
+          const timeDelivery = time(dateHourApiDelivery - dateHourApiFinished )
+
+          const dateHourApiFinal = Date.parse(product.updatedAt); 
+          const timeOrder = time(dateHourApiFinal - dateHourApiInitial )
+
           return(
             <div className='order-conteiner'>
               <div className='order-sub-conteiner' key={`finalized-orders-${product.id}`}>
                 <div className='card-orders'>
-                  <div className='order-data'>
-                    <p className='yellow-text waiter-data-resume'>Atendente ID: {product.user_id}</p>
+                  <div className='order-data-init'>
+                    <p className='yellow-text waiter-data-resume'>Atendente: {name}</p>
                     <p className='yellow-text order-data-resume'>Pedido Nº: {product.id}</p>
                   </div>
                   <div className='order-data'>
@@ -58,7 +78,12 @@ const FinalizedOrders = () => {
                     <p className='yellow-text order-table'>Mesa: {product.table}</p>
                   </div>
                   <div>
-                    <p className='yellow-text order-date-hour'>Data/Hora: {product.createdAt}</p>
+                    <div className= 'order-data'>
+                      <p className='yellow-text order-date-hour'>Data/Hora: {dateConvert}</p>
+                    </div>
+                    <p className='yellow-text order-date-hour'>Tempo de Preparo: {timeFinished}</p>
+                    <p className='yellow-text order-date-hour'>Tempo de Entrega: {timeDelivery}</p>
+                    <p className='yellow-text order-date-hour'>Tempo de Total: {timeOrder}</p>
                   </div>
                   <div className='order-data'>
                     <p className='yellow-text order-status'>{product.status}</p>
@@ -73,7 +98,7 @@ const FinalizedOrders = () => {
                   return(
                     <div className='container-order-resume-product' key={item.id}>
                       <p className='product-quant'>{item.qtd}</p>
-                      <p className='product-name'>{item.name} </p>                  
+                      <p className='product-name'>{item.name} {item.flavor} {item.complement}</p>                  
                     </div>                    
                   )})}
                 </div>

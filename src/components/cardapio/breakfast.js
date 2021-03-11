@@ -164,7 +164,7 @@ const Breakfast = () => {
       </div>
       <div className='show-product'>      
         {
-          menuCafe.map((product, index) => {
+          menuCafe.map((product) => {
             return (
               <div key={`breakfast-item-${product.id}`}>
                 <button className='card-product' 
@@ -189,7 +189,7 @@ const Breakfast = () => {
                 RESUMO DO PEDIDO
               </div>
               <div className='card-resume'>
-                <p className='yellow-text waiter-data-resume'> {nameAtendente}</p>
+                <p className='yellow-text waiter-data-resume'> Atendente: {nameAtendente}</p>
                 <div className='client-data-resume'>
                   <p className='yellow-text resume-client'> Cliente: {client}</p> 
                   <p className='yellow-text resume-table'> Mesa: {table}</p> 
@@ -203,7 +203,7 @@ const Breakfast = () => {
             <div className='order-resume-container'>
               {itemPedido.map((product, index) => (
                 <div className='container-order-resume-product' key={`item-breakfast-${product.id}`}>
-                  <label className='product-name'> {product.name}</label>  
+                  <label className='product-name-resume'> {product.name}</label>  
                   <label className='product-price'> R$ {product.price},00 </label>                     
                   <div className='product-qtd'>
                     <input 
