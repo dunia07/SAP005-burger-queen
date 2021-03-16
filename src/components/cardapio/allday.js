@@ -138,7 +138,7 @@ const Allday = () => {
         setClient([]);
         setTable([])
         limparInput()
-        alert('Pedido Criado com Sucesso!');
+        // alert('Pedido Criado com Sucesso!');
         setMenuAlmocoJanta(prevMenuAlmocoJanta => {
           return prevMenuAlmocoJanta.map(prevItem=> ({...prevItem, disabled: false }))
         })

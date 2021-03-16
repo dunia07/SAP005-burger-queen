@@ -20,11 +20,19 @@ const ReadyOrders = () => {
     })       
     
     .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        const order = json.filter(item => item.status === 'Pedido pronto')
+      .then((result) => {
+        // console.log(result);
+        result.sort((a, b) => {
+          if (a.id > b.id) {
+            return 1;
+          } 
+          if (a.id < b.id) {
+            return - 1;
+          }
+          return 0
+        }).reverse()
+        const order = result.filter(item => item.status === 'Pedido pronto')
         setOrder(order)
-        
       });
 
   }, [token])
