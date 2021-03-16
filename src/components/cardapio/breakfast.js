@@ -132,7 +132,7 @@ const Breakfast = () => {
         setClient([]);
         setTable([]);
         limparInput();
-        alert('Pedido Criado com Sucesso!');
+        // alert('Pedido Criado com Sucesso!');
         setMenuCafe(prevMenuCafe => {
           return prevMenuCafe.map(prevItem=> ({...prevItem, disabled: false }))
         })
