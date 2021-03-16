@@ -21,7 +21,7 @@ const ReadyOrders = () => {
     
     .then((response) => response.json())
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         result.sort((a, b) => {
           if (a.id > b.id) {
             return 1;
@@ -63,6 +63,7 @@ const ReadyOrders = () => {
       setOrderStatus({...orderStatus, status: 'Pedido entregue'})
       getOrders()
     })
+    .catch((error) => console.log('error'))
   }
 
   const time = (milisegundos) => {
@@ -115,7 +116,7 @@ const ReadyOrders = () => {
                     <p className='yellow-text order-item'> Item </p>
                   </div>
                   <div className='order-product-container'>{product.Products.map(function(item) {
-                    console.log(item)
+                    // console.log(item)
                     return(
                       <div className='container-order-resume-product' key={item.id}>
                         <p className='product-quant'>{item.qtd}</p>

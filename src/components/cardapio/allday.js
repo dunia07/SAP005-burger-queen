@@ -145,9 +145,7 @@ const Allday = () => {
       })
     )
   };
-
-  console.log(itemPedido)
-
+  // console.log(itemPedido)
   return (
     <div className='product'>
       <div className='show-input'>
