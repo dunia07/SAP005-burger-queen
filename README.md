@@ -2,6 +2,14 @@
 
 Acesse a aplicação aqui: https://lab-burger.vercel.app/
 
+### Usuários para teste :mag_right:
+
+`Cozinha: cozinhalabburger@cozinha.com /
+Senha: labburger`
+
+`Salão: salaolabburger@salao.com /
+Senha: labburger`
+
 ## Índice
 
 - [1. Apresentação](#1-apresentação)
@@ -50,7 +58,9 @@ O protótipo foi desenvolvido utilizando o _figma_, e testado a usabilidade faze
 
 Durante a implantação algumas melhorias foram feitas para melhorar a experiência dos usuários, chegando na página final.
 
-![](/src/image/login.jpeg)
+![](/src/image/gif.gif)
+
+<!-- ![](/src/image/login.jpeg)
 
 ![](/src/image/menupedidos.jpeg)
 
@@ -60,7 +70,7 @@ Durante a implantação algumas melhorias foram feitas para melhorar a experiên
 
 ![](/src/image/pedidosprontos.jpeg)
 
-![](/src/image/pedidosfinalizados.jpeg)
+![](/src/image/pedidosfinalizados.jpeg) -->
 
 ## 5. Desenvolvimento :calendar:
 
